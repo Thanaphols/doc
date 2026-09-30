@@ -1,0 +1,5 @@
+# Temporary Word lock files
+~$*
+
+# Process temp files (renders, caches, analysis text dumps)
+process/temp/
