@@ -4,8 +4,8 @@
 > ทุกข้อด้านล่างตรวจกับโค้ดจริงแล้ว (2026-09-30) ถ้าจะเขียนอะไรนอกเหนือจากนี้ ต้องเปิดโค้ดยืนยันก่อน
 
 ## ชื่อโปรเจกต์ (ใช้ชื่อนี้ชื่อเดียวทั้งเล่ม)
-- **TH**: ระบบรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)
-- **EN**: Chatshop: Centralized Chat and Order Management System for Online Business
+- **TH**: แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)
+- **EN**: Chatshop: Centralized Chat and Order Management Application for Online Business
 - เล่มรุ่นพี่ "บ้านฟาร์มขนม" ใน `input/reference/` ใช้ดูสไตล์เท่านั้น **ห้ามนำเนื้อหามาใช้**
 
 ## Source code (ใช้ยืนยันข้อเท็จจริง)

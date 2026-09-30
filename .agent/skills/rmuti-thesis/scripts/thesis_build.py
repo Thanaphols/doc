@@ -23,6 +23,11 @@ import os
 import re
 import sys
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+
 import docx
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
@@ -46,7 +51,7 @@ def add_caption(container, label, chapter, text, align):
     p.add_run(f"{label} {chapter}.")
     seq_no = container._seq[label] = container._seq.get(label, 0) + 1
     fld = OxmlElement("w:fldSimple")
-    fld.set(qn("w:instr"), f" SEQ {label} \* ARABIC ")
+    fld.set(qn("w:instr"), f" SEQ {label} \\* ARABIC ")
     r = OxmlElement("w:r")
     t = OxmlElement("w:t")
     t.text = str(seq_no)
