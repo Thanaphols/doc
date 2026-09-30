@@ -1,12 +1,13 @@
-# SCOPE — ขอบเขตงานแอปพลิเคชัน Chatshop (chatshop_app)
+# SCOPE — ขอบเขตงาน Chatshop (ระบบหลังบ้าน + แอปพลิเคชัน)
 
 > ใช้เป็นแหล่งข้อมูลหลักสำหรับเขียนเล่มปริญญานิพนธ์
 > แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)
-> โค้ดแอปพลิเคชัน: `C:\interm\chatshop_app` (Flutter) เชื่อมต่อระบบหลังบ้าน `C:\interm\chatshop` (Laravel)
+> ระบบหลังบ้าน: `C:\interm\chatshop` (Laravel) · แอปพลิเคชัน: `C:\interm\chatshop_app` (Flutter)
 
-## การแบ่งงาน
-- **ผู้จัดทำ (เจ้าของไฟล์นี้)**: แอปพลิเคชันบนสมาร์ตโฟนทั้งหมด — Flutter 3.x, Dart (หน้าจอ 13 โมดูล, Riverpod, Reverb Realtime, FCM Push Notification, Secure Storage, Native Auth)
-- **ผู้ร่วมพัฒนา**: ระบบเว็บและระบบหลังบ้าน — Laravel 10 (ระบบสนับสนุน API, Webhook, Queue, Database)
+## ผู้พัฒนา
+ผู้จัดทำพัฒนาเองคนเดียวทั้งหมด ไม่มีทีมพัฒนา:
+- **ระบบหลังบ้าน**: Laravel 10 — ฐานข้อมูล, REST API, Webhook, Queue, Realtime, Push, แชทบอท
+- **แอปพลิเคชันบนสมาร์ตโฟน**: Flutter 3.x, Dart — หน้าจอ 13 โมดูล, Riverpod, Reverb Realtime, FCM Push Notification, Secure Storage, Native Auth
 
 ## Stack (ตรวจจากโค้ดแล้ว)
 | ส่วน | ใช้อะไร | หลักฐาน |
@@ -49,13 +50,13 @@
 | 21 | Realtime | event 11+ ชนิดผ่านช่อง `private-tenant.{id}` | `app/Events/*` | ของเรา | ใส่ |
 | 22 | REST API สำหรับแอป | 99 route ใต้ `api/mobile/*` + Sanctum | `routes/api.php`, `Api/*Controller` | ของเรา | ใส่ |
 | 23 | ส่ง push (FCM) | ส่งแจ้งเตือนไปยังเครื่องที่ลงทะเบียน | `PushService`, `mobile/devices` | ของเรา | ใส่ |
-| 24 | แผงผู้ดูแลแพลตฟอร์ม | admin login + 2FA, จัดการ/ระงับร้าน, dashboard, รีวิว/รายงานปัญหา | `Admin/*Controller` | ไม่ใช่งานเรา (เกี่ยวกับเงิน) | ไม่ใส่ |
-| 25 | แพ็กเกจ / subscription | ดูแพ็กเกจ, admin กำหนดแพ็กเกจให้ร้าน, บันทึก token/ค่าใช้จ่าย LLM | `SubscriptionController`, `Admin\TenantController@assignPlan`, `ChatbotUsageController` | ไม่ใช่งานเรา? | ไม่ใส่ |
-| 26 | CF-Shops SSO | เข้าสู่ระบบ/เชื่อมร้านจาก CF-Shops | `CfShopsConnectController` | ไม่ใช่งานเรา | ไม่ใส่ |
+| 24 | แผงผู้ดูแลแพลตฟอร์ม | admin login + 2FA, จัดการ/ระงับร้าน, dashboard, รีวิว/รายงานปัญหา | `Admin/*Controller` | ของเรา | ไม่ใส่ (เกี่ยวกับเงิน) |
+| 25 | แพ็กเกจ / subscription | ดูแพ็กเกจ, admin กำหนดแพ็กเกจให้ร้าน, บันทึก token/ค่าใช้จ่าย LLM | `SubscriptionController`, `Admin\TenantController@assignPlan`, `ChatbotUsageController` | ของเรา | ไม่ใส่ |
+| 26 | CF-Shops SSO | เข้าสู่ระบบ/เชื่อมร้านจาก CF-Shops | `CfShopsConnectController` | ของเรา | ไม่ใส่ |
 
 ## คำตอบของผู้จัดทำ (2026-09-29)
 1. ข้อ 24 แผงผู้ดูแลแพลตฟอร์ม: ตัดออก ฟังก์ชันน้อยและส่วนใหญ่เกี่ยวกับเงิน
 2. ข้อ 11 ตอบอัตโนมัติด้วยคีย์เวิร์ด: ใส่ในเล่ม / ข้อ 18 CSAT: ไม่ใส่
-3. ฟีเจอร์ที่ทำร่วมกับคนอื่น: นับเป็นงานของผู้จัดทำทั้งหมด
+3. ทุกฟีเจอร์เป็นงานของผู้จัดทำทั้งหมด ไม่มีผู้ร่วมพัฒนา (ยืนยัน 2026-09-30)
 4. งานที่ไม่อยู่ในตาราง: ไม่มี ครบแล้ว
 5. ไฟล์ที่แก้ค้างใน branch `eark`: ยังไม่ได้ตอบ

@@ -9,18 +9,24 @@
 - เล่มรุ่นพี่ "บ้านฟาร์มขนม" ใน `input/reference/` ใช้ดูสไตล์เท่านั้น **ห้ามนำเนื้อหามาใช้**
 
 ## Source code (ใช้ยืนยันข้อเท็จจริง)
-- App (งานหลักของผู้จัดทำ): `C:\interm\chatshop_app` — Flutter 3.x, Dart (sdk ^3.10.7), Flutter Riverpod (^3.3.2), GoRouter (^17.5.0), laravel_reverb, firebase_messaging, flutter_secure_storage
-- Backend (อ้างอิงสถาปัตยกรรมและ API): `C:\interm\chatshop` — Laravel 10 (MySQL, MongoDB, Queue, Reverb, Sanctum)
+- ระบบหลังบ้าน: `C:\interm\chatshop` — Laravel 10 (MySQL, MongoDB, Queue, Reverb, Sanctum)
+- แอปพลิเคชัน: `C:\interm\chatshop_app` — Flutter 3.x, Dart (sdk ^3.10.7), Flutter Riverpod (^3.3.2), GoRouter (^17.5.0), laravel_reverb, firebase_messaging, flutter_secure_storage
 
 ## ขอบเขตงาน: ดู `input/SCOPE.md` เป็นหลัก
-`input/SCOPE.md` คือรายการฟีเจอร์ที่ผู้จัดทำยืนยันเองว่าทำ/ไม่ทำ และใส่/ไม่ใส่ในเล่ม ถ้าขัดกับไฟล์นี้ ให้ยึด SCOPE.md
+`input/SCOPE.md` คือรายการฟีเจอร์ที่ผู้จัดทำยืนยันเองว่าใส่/ไม่ใส่ในเล่ม ถ้าขัดกับไฟล์นี้ ให้ยึด SCOPE.md
 
-## การแบ่งงาน (ทีม 2 คน แบ่งตามแพลตฟอร์ม)
-เล่มนี้เป็นเล่มเดี่ยวของผู้จัดทำ ซึ่งรับผิดชอบ **แอปพลิเคชันบนสมาร์ตโฟน (Flutter) ทั้งหมด** โดยอ้างอิงและเชื่อมต่อกับระบบหลังบ้าน (Laravel)
+## ผู้พัฒนา: ผู้จัดทำคนเดียวทั้งระบบ
+**ไม่มีทีมพัฒนา ไม่มีผู้ร่วมพัฒนา** ผู้จัดทำออกแบบและพัฒนาเองทั้งหมด 2 ส่วนที่ทำงานร่วมกัน:
 
-| ผู้จัดทำ: App Flutter ทั้งหมด (เขียนละเอียด) | ผู้ร่วมพัฒนา: Web / Laravel ทั้งหมด (ระบบสนับสนุนและบริบท) |
+| ส่วน | สิ่งที่ผู้จัดทำพัฒนา |
 |---|---|
-| หน้าจอแอปทั้งหมด (13 โมดูล), Riverpod (State Management), go_router (Routing & ShellRoute), การรับ push (FCM + local notifications), การเชื่อมต่อ Realtime (laravel_reverb), การจัดการโทเคน (flutter_secure_storage), native Facebook/Google login ในแอป, การจัดการสื่อ (image/video/file picker), การควบคุมแชทบอท & analysis sheet บนแอป | หน้าเว็บ Blade/React, backend, เชื่อมช่องทาง + webhook ขาเข้า, ส่งข้อความออกแพลตฟอร์ม, จัดเก็บ media ฝั่ง server, บรอดแคสต์, แท็ก, นำเข้าประวัติ, จัดการทีมฝั่งเว็บ, แชทบอทฝั่งหลังบ้าน + RAG, ฐานข้อมูล MySQL/MongoDB, เซิร์ฟเวอร์ Reverb, REST API `mobile/*` |
+| **ระบบหลังบ้าน (Laravel)** | ฐานข้อมูล MySQL/MongoDB, REST API `mobile/*` + Sanctum, เชื่อมช่องทาง + webhook ขาเข้า, ส่งข้อความออกแพลตฟอร์ม, จัดเก็บ/ย่อ media, คิวและ scheduler, เซิร์ฟเวอร์ Reverb + event, ส่ง push ผ่าน FCM, ทีมและสิทธิ์, บรอดแคสต์, แท็ก, นำเข้าประวัติ, ตอบอัตโนมัติด้วยคีย์เวิร์ด, แชทบอท + RAG, หน้าเว็บจัดการ (Blade/React) |
+| **แอปพลิเคชันบนสมาร์ตโฟน (Flutter)** | หน้าจอแอปทั้งหมด (13 โมดูล), Riverpod, go_router (ShellRoute), รับ push (FCM + local notifications), Realtime (laravel_reverb), เก็บโทเคน (flutter_secure_storage), native Facebook/Google login, เลือก/ส่งสื่อ (image/video/file picker), ควบคุมแชทบอท + analysis sheet |
+
+วิธีเขียนในเล่ม:
+- ใช้ "ผู้จัดทำพัฒนา..." กับทั้งสองส่วน ห้ามเขียนว่าส่วนใด "พัฒนาโดยผู้อื่น" / "ผู้ร่วมพัฒนา" / "ทีมพัฒนา"
+- นำเสนอเป็นระบบเดียว: แอปเป็นหน้าจอหลักของผู้ใช้ หลังบ้านรับข้อมูลจากแพลตฟอร์ม ประมวลผล และเปิด API ให้แอป
+- "ทีมงาน" ในเล่มหมายถึงเจ้าหน้าที่ของร้านค้าที่ใช้ระบบ (ฟีเจอร์ทีมและบทบาท) ไม่ใช่ทีมพัฒนา
 
 ## ข้อเท็จจริงของระบบ
 
@@ -105,7 +111,7 @@
 - `ConversationLockService`: ถ้าเปิด auto-lock เจ้าหน้าที่คนแรกที่ตอบจะล็อกบทสนทนา (ผู้มีสิทธิ์ `assign` ข้ามได้)
 - `SummarizeConversationJob`: เก็บบทสรุปแบบสะสม (`context_summary`, `summarized_through`) โดยเก็บข้อความล่าสุด 10 ข้อความไว้แบบเต็ม
 - บันทึก token/ค่าใช้จ่ายทุกครั้งที่เรียกใช้ (`chatbot_usage_logs`); แพ็กเกจกำหนดสิทธิ์ใช้ Anthropic/Gemini และโควตาเป็น USD ต่อเดือน
-- (บริบท — แอปของผู้ร่วมพัฒนา) badge/แถบสถานะ AI, sheet สำหรับเปลี่ยนโหมด (optimistic update + rollback), `POST .../ai/suggest`, `PATCH .../ai-mode`; analysis sheet `POST .../analysis` ที่ใช้ LLM จริง → summary, sentiment, intent, topics, signals (VIP/returning/urgent) · `ai_mock.dart` เป็นแค่ fallback เมื่อเรียก endpoint ไม่สำเร็จ
+- (แอป) badge/แถบสถานะ AI, sheet สำหรับเปลี่ยนโหมด (optimistic update + rollback), `POST .../ai/suggest`, `PATCH .../ai-mode`; analysis sheet `POST .../analysis` ที่ใช้ LLM จริง → summary, sentiment, intent, topics, signals (VIP/returning/urgent) · `ai_mock.dart` เป็นแค่ fallback เมื่อเรียก endpoint ไม่สำเร็จ
 
 ### RAG / Knowledge
 - CRUD เอกสาร FAQ (`KnowledgeController`, ต้องมีสิทธิ์ `settings`) → `IndexKnowledgeDocumentJob`
@@ -120,14 +126,14 @@
 - การตั้ง shipping address จะอัปเดตที่อยู่ของลูกค้าไปด้วย
 - `products`: tenant_id, business_id, name, price, description
 - `customers`: tenant_id, platform, platform_id, name, phone, address, note (≤ 2000 ตัวอักษร), avatar_url
-- (บริบท — แอปของผู้ร่วมพัฒนา) หน้าออเดอร์แยกแท็บตามสถานะ + ค้นหา + infinite scroll; form ช่วยเติมชื่อสินค้าอัตโนมัติจาก catalog; profile sheet แสดงประวัติคำสั่งซื้อของลูกค้าในบทสนทนา
+- (แอป) หน้าออเดอร์แยกแท็บตามสถานะ + ค้นหา + infinite scroll; form ช่วยเติมชื่อสินค้าอัตโนมัติจาก catalog; profile sheet แสดงประวัติคำสั่งซื้อของลูกค้าในบทสนทนา
 
 ### Settings / SLA / Notifications / Reports
 - SLA: `tenants.sla_minutes` เลือกได้ 5/10/15/20 นาที (ค่าเริ่มต้น 5) · ถือว่า breach เมื่อมีข้อความยังไม่อ่าน ยังไม่มีการตอบครั้งแรก และข้อความล่าสุดเก่ากว่าเกณฑ์ → broadcast `NotificationCreated` + FCM ไปยังผู้มีสิทธิ์ `reply`, ตั้ง `sla_alerted_at` เพื่อไม่ให้แจ้งซ้ำ
-- (บริบท — แอป) Settings ในแอปมี 8 จอ: ทั่วไป (tenant), ธุรกิจ, ระบบอัตโนมัติ (lock + chatbot mode), AI Chatbot (engine/API key/model/ทดสอบการเชื่อมต่อ), SLA, การแจ้งเตือน, แพ็กเกจ (ดูได้อย่างเดียว), แท็ก
+- (แอป) Settings ในแอปมี 8 จอ: ทั่วไป (tenant), ธุรกิจ, ระบบอัตโนมัติ (lock + chatbot mode), AI Chatbot (engine/API key/model/ทดสอบการเชื่อมต่อ), SLA, การแจ้งเตือน, แพ็กเกจ (ดูได้อย่างเดียว), แท็ก
 - การแจ้งเตือนตั้งค่าได้รายผู้ใช้: sound, push, trigger (ทั้งหมด/เฉพาะที่ได้รับมอบหมาย), muted channels
 - Saved reply: CRUD + นำเข้าจาก Facebook Graph API
-- (บริบท — แอป) Notifications feed: ประเภท urgent/message/paid/mention/system, badge จำนวนที่ยังไม่อ่าน, อ่านทั้งหมด, แตะแล้วเปิดแชท
+- (แอป) Notifications feed: ประเภท urgent/message/paid/mention/system, badge จำนวนที่ยังไม่อ่าน, อ่านทั้งหมด, แตะแล้วเปิดแชท
 - Reports (`OverviewController`): first response, resolution, SLA, volume, channel mix, heatmap, performance ต่อเพจ/ต่อเจ้าหน้าที่, export CSV (UTF-8 BOM) · ในแอปแสดงเฉพาะ summary cards + channel mix (`GET mobile/overview?range=7d`)
 
 
@@ -136,11 +142,11 @@
 - ใช้ "แชทบอท" เฉยๆ **ห้ามใช้ "แชทบอทปัญญาประดิษฐ์"** เพราะอ่านแล้วเหมือน AI เขียน
 - ใช้ "แอปพลิเคชันบนสมาร์ตโฟน" / "แอปพลิเคชันสมาร์ตโฟน" แทน "อุปกรณ์เคลื่อนที่"
 
-## ไม่อยู่ในความรับผิดชอบ (ห้ามใส่ในเล่ม)
+## ตัดออกจากเล่ม (มีในโค้ดแต่ไม่ใส่)
 - แผงผู้ดูแลแพลตฟอร์ม (`admin/*`: admin login + 2FA, จัดการ/ระงับร้าน) — ผู้จัดทำตัดออก
 - CSAT แบบประเมินความพึงพอใจหลังปิดแชท — มีในโค้ดแต่ผู้จัดทำไม่ใส่ในเล่ม
-- CF-Shops SSO / การเชื่อมร้านจาก CF-Shops — ไม่ใช่งานของผู้จัดทำ
-- แพ็กเกจ / subscription / ราคา / โควตาการใช้งาน และการบันทึก token หรือค่าใช้จ่าย LLM — ผู้จัดทำเป็นนักศึกษาฝึกงาน ไม่ได้ทำส่วนนี้และไม่มีอำนาจกำหนดราคา (ในแอปมีจอตั้งค่าแพ็กเกจก็ไม่ต้องกล่าวถึง)
+- CF-Shops SSO / การเชื่อมร้านจาก CF-Shops — ไม่ใส่ในเล่ม
+- แพ็กเกจ / subscription / ราคา / โควตาการใช้งาน และการบันทึก token หรือค่าใช้จ่าย LLM — ไม่ใส่ในเล่ม (ในแอปมีจอตั้งค่าแพ็กเกจก็ไม่ต้องกล่าวถึง)
 
 ## ห้ามอ้างในเล่ม (ไม่มีในโค้ด)
 - vector database (Pinecone/Qdrant/pgvector ฯลฯ) — ระบบใช้ cosine แบบ brute-force บน MongoDB

@@ -3,7 +3,7 @@
 แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)
 Chatshop: Centralized Chat and Order Management Application for Online Business
 หลักสูตรวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน ขอนแก่น
-ขอบเขตการพัฒนาแอปพลิเคชันด้วย Flutter (`C:\interm\chatshop_app`) โดยเชื่อมต่อและอ้างอิงระบบหลังบ้าน Laravel (`C:\interm\chatshop`) ดูรายละเอียดใน `.agent/rules/chatshop.md`
+ผู้จัดทำพัฒนาเองทั้งระบบหลังบ้าน Laravel (`C:\interm\chatshop`) และแอปพลิเคชัน Flutter (`C:\interm\chatshop_app`) ดูรายละเอียดใน `.agent/rules/chatshop.md`
 
 ---
 
@@ -17,7 +17,7 @@ d:\sahakit\doc\
 ├── process/temp/           # ภาพตัวอย่างหน้า PNG และไฟล์ชั่วคราว (.gitignored)
 ├── output/                 # ไฟล์ .docx / .pdf ของแต่ละบท
 └── .agent/
-    ├── rules/chatshop.md   # fact sheet ของโปรเจกต์ (ตรวจกับโค้ดจริงแล้ว) + การแบ่งงาน
+    ├── rules/chatshop.md   # fact sheet ของโปรเจกต์ (ตรวจกับโค้ดจริงแล้ว)
     └── skills/rmuti-thesis/
         ├── SKILL.md        # กฎรูปเล่ม มทร.อีสาน + โครงบท + checklist
         └── scripts/thesis_build.py
