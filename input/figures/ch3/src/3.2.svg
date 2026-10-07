@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1000" viewBox="0 0 1720 1000" font-family="Leelawadee UI, Tahoma, sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+<marker id="ahs" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#475569"/></marker>
+<marker id="gen" viewBox="0 0 20 20" refX="19" refY="10" markerWidth="16" markerHeight="16" orient="auto"><path d="M0,0 L20,10 L0,20 z" fill="#fff" stroke="#1e293b" stroke-width="2"/></marker>
+</defs>
+<rect width="1720" height="1000" fill="#fff"/>
+<rect x="40" y="60" width="320" height="500" rx="18" fill="#f8fafc" stroke="#0284c7" stroke-width="3"/>
+<rect x="54" y="74" width="292" height="56" rx="12" fill="#0284c7"/>
+<text x="200" y="94.85000000000001" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">แอปพลิเคชัน</text>
+<text x="200" y="124.55000000000001" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">บนสมาร์ตโฟน</text>
+<rect x="70" y="150" width="260" height="70" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="200" y="192.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">ตัวเรียก REST API</text>
+<rect x="70" y="290" width="260" height="70" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="200" y="332.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">บริการเรียลไทม์</text>
+<rect x="70" y="430" width="260" height="70" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="200" y="472.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">บริการแจ้งเตือน</text>
+<text x="200" y="537.7" font-size="22" font-weight="700" fill="#0284c7" text-anchor="middle">Flutter</text>
+<rect x="440" y="60" width="640" height="500" rx="18" fill="#f8fafc" stroke="#1e3a8a" stroke-width="3"/>
+<rect x="454" y="74" width="612" height="56" rx="12" fill="#1e3a8a"/>
+<text x="760" y="111.1" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">ระบบบริการหลังบ้าน (Laravel 10)</text>
+<rect x="470" y="130" width="280" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="610" y="177.20000000000002" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">REST API</text>
+<text x="610" y="209.60000000000002" font-size="20" font-weight="400" fill="#1e3a8a" text-anchor="middle">Laravel Sanctum</text>
+<rect x="780" y="130" width="280" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="920" y="177.85" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">รับ Webhook / ส่งข้อความ</text>
+<text x="920" y="207.55" font-size="20" font-weight="400" fill="#1e3a8a" text-anchor="middle">HMAC-SHA256</text>
+<rect x="470" y="270" width="280" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="610" y="317.2" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">Laravel Reverb</text>
+<text x="610" y="349.6" font-size="20" font-weight="400" fill="#1e3a8a" text-anchor="middle">WebSocket</text>
+<rect x="780" y="270" width="280" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="920" y="317.84999999999997" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">คิวงานและ</text>
+<text x="920" y="347.54999999999995" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">ตัวจัดตารางเวลา</text>
+<rect x="470" y="410" width="280" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="610" y="457.2" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">จัดการไฟล์สื่อ</text>
+<text x="610" y="489.6" font-size="20" font-weight="400" fill="#1e3a8a" text-anchor="middle">PHP GD / ffmpeg</text>
+<rect x="780" y="410" width="280" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="920" y="473.4" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">แชทบอท</text>
+<rect x="440" y="660" width="640" height="230" rx="18" fill="#f8fafc" stroke="#059669" stroke-width="3"/>
+<rect x="454" y="674" width="612" height="56" rx="12" fill="#059669"/>
+<text x="760" y="711.1" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">ฐานข้อมูล</text>
+<rect x="470" y="750" width="280" height="110" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="610" y="797.1999999999999" font-size="24" font-weight="600" fill="#065f46" text-anchor="middle">MySQL</text>
+<text x="610" y="829.5999999999999" font-size="20" font-weight="400" fill="#065f46" text-anchor="middle">ข้อมูลเชิงสัมพันธ์</text>
+<rect x="780" y="750" width="280" height="110" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="920" y="797.1999999999999" font-size="24" font-weight="600" fill="#065f46" text-anchor="middle">MongoDB</text>
+<text x="920" y="829.5999999999999" font-size="19" font-weight="400" fill="#065f46" text-anchor="middle">บทสนทนา ข้อความ ฐานความรู้</text>
+<rect x="1160" y="60" width="320" height="830" rx="18" fill="#f8fafc" stroke="#475569" stroke-width="3"/>
+<rect x="1174" y="74" width="292" height="56" rx="12" fill="#475569"/>
+<text x="1320" y="111.1" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">บริการภายนอก</text>
+<rect x="1185" y="130" width="270" height="90" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1320" y="182.7" font-size="22" font-weight="600" fill="#1e293b" text-anchor="middle">LINE Messaging API</text>
+<rect x="1185" y="250" width="270" height="110" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1320" y="297.84999999999997" font-size="22" font-weight="600" fill="#1e293b" text-anchor="middle">Meta Graph API</text>
+<text x="1320" y="327.54999999999995" font-size="20" font-weight="400" fill="#1e293b" text-anchor="middle">Messenger / Instagram</text>
+<rect x="1185" y="410" width="270" height="110" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1320" y="457.84999999999997" font-size="22" font-weight="600" fill="#1e293b" text-anchor="middle">บริการแบบจำลองภาษา</text>
+<text x="1320" y="487.54999999999995" font-size="18" font-weight="400" fill="#1e293b" text-anchor="middle">Ollama / Claude / Gemini</text>
+<rect x="1185" y="750" width="270" height="110" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1320" y="797.85" font-size="22" font-weight="600" fill="#1e293b" text-anchor="middle">Firebase Cloud</text>
+<text x="1320" y="827.5500000000001" font-size="22" font-weight="600" fill="#1e293b" text-anchor="middle">Messaging</text>
+<circle cx="1620" cy="190" r="22" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1620" y1="212" x2="1620" y2="260" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1580" y1="228" x2="1660" y2="228" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1620" y1="260" x2="1588" y2="310" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1620" y1="260" x2="1652" y2="310" stroke="#1e293b" stroke-width="3" fill="none"/>
+<text x="1620" y="350.4" font-size="24" font-weight="700" fill="#1e293b" text-anchor="middle">ลูกค้า</text>
+<polyline points="330,185 470,185" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<text x="400" y="167" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">REST API</text>
+<polyline points="470,325 330,325" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="400" y="307" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">WebSocket</text>
+<polyline points="1185,165 1060,165" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<polyline points="1185,305 1120,305 1120,210 1060,210" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<text x="1320" y="242.3" font-size="18" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">Webhook / ส่งข้อความ</text>
+<polyline points="1060,465 1185,465" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<polyline points="760,560 760,660" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<text x="870" y="617" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">อ่าน / บันทึกข้อมูล</text>
+<polyline points="1080,530 1120,530 1120,805 1185,805" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="1320,860 1320,950 200,950 200,560" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="760" y="957" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">Push Notification</text>
+<polyline points="1575,230 1455,175" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<polyline points="1575,260 1455,305" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+</svg>

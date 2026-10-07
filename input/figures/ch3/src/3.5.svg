@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="1100" viewBox="0 0 1420 1100" font-family="Leelawadee UI, Tahoma, sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+<marker id="ahs" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#475569"/></marker>
+<marker id="gen" viewBox="0 0 20 20" refX="19" refY="10" markerWidth="16" markerHeight="16" orient="auto"><path d="M0,0 L20,10 L0,20 z" fill="#fff" stroke="#1e293b" stroke-width="2"/></marker>
+</defs>
+<rect width="1420" height="1100" fill="#fff"/>
+<rect x="190" y="40" width="660" height="80" rx="40" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="520" y="72.19999999999999" font-size="24" font-weight="600" fill="#ffffff" text-anchor="middle">ข้อความใหม่จากลูกค้า</text>
+<text x="520" y="104.6" font-size="20" font-weight="400" fill="#ffffff" text-anchor="middle">บทสนทนาอยู่ในโหมด Suggest หรือ Autopilot</text>
+<rect x="190" y="170" width="660" height="76" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="520" y="216.4" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">รอ 6 วินาทีเพื่อรวมข้อความที่ลูกค้าส่งติดกัน</text>
+<rect x="190" y="296" width="660" height="76" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="520" y="342.4" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">ค้นคืนส่วนย่อยของเอกสารความรู้ที่เกี่ยวข้อง</text>
+<rect x="190" y="422" width="660" height="110" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="520" y="469.2" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">ประกอบข้อความสั่งงาน</text>
+<text x="520" y="501.6" font-size="20" font-weight="400" fill="#1e3a8a" text-anchor="middle">บุคลิกของร้าน · ข้อมูลแบรนด์ · บทสรุป · ข้อความล่าสุด 20 ข้อความ</text>
+<rect x="190" y="582" width="660" height="76" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="520" y="628.4" font-size="24" font-weight="600" fill="#1e3a8a" text-anchor="middle">ส่งให้แบบจำลองภาษาสร้างคำตอบ</text>
+<polygon points="520,710 710,790 520,870 330,790" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="520" y="782.85" font-size="22" font-weight="600" fill="#92400e" text-anchor="middle">แบบจำลองตอบว่า</text>
+<text x="520" y="812.5500000000001" font-size="22" font-weight="600" fill="#92400e" text-anchor="middle">ต้องส่งต่อ?</text>
+<rect x="920" y="735" width="440" height="110" rx="14" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+<text x="1140" y="782.1999999999999" font-size="24" font-weight="600" fill="#991b1b" text-anchor="middle">ติดแท็กรอแอดมิน</text>
+<text x="1140" y="814.5999999999999" font-size="24" font-weight="600" fill="#991b1b" text-anchor="middle">และเปลี่ยนเป็นโหมด Manual</text>
+<rect x="190" y="930" width="660" height="110" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="520" y="977.1999999999999" font-size="24" font-weight="600" fill="#065f46" text-anchor="middle">Autopilot: ส่งคำตอบถึงลูกค้า</text>
+<text x="520" y="1009.5999999999999" font-size="24" font-weight="600" fill="#065f46" text-anchor="middle">Suggest: แสดงคำตอบแนะนำให้เจ้าหน้าที่</text>
+<polyline points="520,120 520,170" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="520,246 520,296" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="520,372 520,422" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="520,532 520,582" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="520,658 520,710" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="710,790 920,790" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="810" y="775" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">ใช่</text>
+<polyline points="520,870 520,930" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="565" y="902" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">ไม่ใช่</text>
+</svg>

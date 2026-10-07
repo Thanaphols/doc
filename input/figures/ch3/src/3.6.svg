@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="810" viewBox="0 0 1700 810" font-family="Leelawadee UI, Tahoma, sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+<marker id="ahs" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#475569"/></marker>
+<marker id="gen" viewBox="0 0 20 20" refX="19" refY="10" markerWidth="16" markerHeight="16" orient="auto"><path d="M0,0 L20,10 L0,20 z" fill="#fff" stroke="#1e293b" stroke-width="2"/></marker>
+</defs>
+<rect width="1700" height="810" fill="#fff"/>
+<rect x="40" y="40" width="370" height="100" rx="50" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="225" y="97.7" font-size="22" font-weight="600" fill="#ffffff" text-anchor="middle">ผู้ใช้เข้าสู่ระบบ</text>
+<rect x="455" y="40" width="370" height="100" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="640" y="82.85000000000001" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">ขออนุญาตแสดง</text>
+<text x="640" y="112.55000000000001" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">การแจ้งเตือน</text>
+<rect x="870" y="40" width="370" height="100" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="1055" y="82.85000000000001" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">ลงทะเบียนโทเคนของ</text>
+<text x="1055" y="112.55000000000001" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">อุปกรณ์กับระบบหลังบ้าน</text>
+<rect x="1285" y="40" width="370" height="100" rx="14" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="1470" y="82.85000000000001" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">เชื่อมต่อช่องส่วนตัวของ</text>
+<text x="1470" y="112.55000000000001" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">ร้านค้าผ่าน Laravel Reverb</text>
+<polyline points="410,90 455,90" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="825,90 870,90" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="1240,90 1285,90" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polygon points="850,225 1020,290 850,355 680,290" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="850" y="282.84999999999997" font-size="22" font-weight="600" fill="#92400e" text-anchor="middle">แอปพลิเคชัน</text>
+<text x="850" y="312.54999999999995" font-size="22" font-weight="600" fill="#92400e" text-anchor="middle">เปิดอยู่?</text>
+<polyline points="1470,140 1470,190 850,190 850,225" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="330" y="400" width="460" height="80" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="560" y="448.4" font-size="24" font-weight="600" fill="#075985" text-anchor="middle">รับเหตุการณ์ผ่าน WebSocket</text>
+<polyline points="680,290 560,290 560,400" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="620" y="277" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">ใช่</text>
+<rect x="30" y="600" width="210" height="170" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="135" y="667" font-size="18" font-weight="700" fill="#075985" text-anchor="middle">MessageReceived</text>
+<text x="135" y="691.3" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">เพิ่มข้อความในหน้าต่าง</text>
+<text x="135" y="715.6" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">สนทนาและปรับกล่องข้อความ</text>
+<rect x="252" y="600" width="210" height="170" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="357" y="667" font-size="18" font-weight="700" fill="#075985" text-anchor="middle">ConversationUpdated</text>
+<text x="357" y="691.3" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">ปรับผู้รับผิดชอบ แท็ก</text>
+<text x="357" y="715.6" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">และโหมดแชทบอท</text>
+<rect x="474" y="600" width="210" height="170" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="579" y="679.15" font-size="18" font-weight="700" fill="#075985" text-anchor="middle">NotificationCreated</text>
+<text x="579" y="703.4499999999999" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">ดึงรายการแจ้งเตือนใหม่</text>
+<rect x="696" y="600" width="210" height="170" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="801" y="679.15" font-size="18" font-weight="700" fill="#075985" text-anchor="middle">OrderUpdated</text>
+<text x="801" y="703.4499999999999" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">โหลดคำสั่งซื้อใหม่</text>
+<rect x="918" y="600" width="210" height="170" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="1023" y="667" font-size="18" font-weight="700" fill="#075985" text-anchor="middle">SettingsChanged</text>
+<text x="1023" y="691.3" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">โหลดการตั้งค่า</text>
+<text x="1023" y="715.6" font-size="17" font-weight="400" fill="#075985" text-anchor="middle">ร้านค้าใหม่</text>
+<line x1="135" y1="545" x2="1023" y2="545" stroke="#475569" stroke-width="2.5"/>
+<polyline points="560,480 560,545" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="135,545 135,600" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="357,545 357,600" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="579,545 579,600" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="801,545 801,600" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="1023,545 1023,600" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1200" y="400" width="460" height="80" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1430" y="433.175" font-size="21" font-weight="600" fill="#1e293b" text-anchor="middle">รับ Push Notification จาก</text>
+<text x="1430" y="461.52500000000003" font-size="21" font-weight="600" fill="#1e293b" text-anchor="middle">Firebase Cloud Messaging</text>
+<rect x="1200" y="540" width="460" height="70" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1430" y="582.7" font-size="22" font-weight="600" fill="#1e293b" text-anchor="middle">ผู้ใช้แตะการแจ้งเตือน</text>
+<rect x="1200" y="670" width="460" height="100" rx="14" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+<text x="1430" y="713.1750000000001" font-size="21" font-weight="600" fill="#1e293b" text-anchor="middle">เปิดหน้าต่างสนทนา หรือหน้ารายการ</text>
+<text x="1430" y="741.5250000000001" font-size="21" font-weight="600" fill="#1e293b" text-anchor="middle">คำสั่งซื้อเมื่อเป็นการแจ้งชำระเงิน</text>
+<polyline points="1020,290 1430,290 1430,400" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="1100" y="277" font-size="20" font-weight="600" fill="#334155" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">ไม่ใช่</text>
+<polyline points="1430,480 1430,540" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+<polyline points="1430,610 1430,670" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#ah)"/>
+</svg>

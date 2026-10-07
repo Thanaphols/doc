@@ -3,3 +3,10 @@
 
 # Process temp files (renders, caches, analysis text dumps)
 process/temp/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Local backup directory
+backup/

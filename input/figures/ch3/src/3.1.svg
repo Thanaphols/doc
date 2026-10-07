@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1060" viewBox="0 0 1600 1060" font-family="Leelawadee UI, Tahoma, sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+<marker id="ahs" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#475569"/></marker>
+<marker id="gen" viewBox="0 0 20 20" refX="19" refY="10" markerWidth="16" markerHeight="16" orient="auto"><path d="M0,0 L20,10 L0,20 z" fill="#fff" stroke="#1e293b" stroke-width="2"/></marker>
+</defs>
+<rect width="1600" height="1060" fill="#fff"/>
+<rect x="420" y="30" width="800" height="1000" rx="20" fill="#f8fafc" stroke="#1e3a8a" stroke-width="3"/>
+<text x="820" y="85.5" font-size="30" font-weight="700" fill="#1e3a8a" text-anchor="middle">ระบบ Chatshop</text>
+<ellipse cx="660" cy="170" rx="180" ry="38" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="660" y="177.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">จัดการช่องทาง</text>
+<ellipse cx="660" cy="265" rx="180" ry="38" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="660" y="272.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">จัดการทีมและบทบาท</text>
+<ellipse cx="660" cy="360" rx="180" ry="38" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="660" y="367.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">ตั้งค่าร้านค้า</text>
+<ellipse cx="660" cy="455" rx="180" ry="38" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="660" y="462.7" font-size="22" font-weight="600" fill="#075985" text-anchor="middle">ตั้งค่าแชทบอท</text>
+<ellipse cx="660" cy="580" rx="180" ry="38" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="660" y="587.7" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">ตอบแชท</text>
+<ellipse cx="660" cy="675" rx="180" ry="38" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="660" y="682.7" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">จัดการบทสนทนา</text>
+<ellipse cx="660" cy="770" rx="180" ry="38" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="660" y="777.7" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">จัดการลูกค้า</text>
+<ellipse cx="660" cy="865" rx="180" ry="38" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="660" y="872.7" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">จัดการสินค้า</text>
+<ellipse cx="660" cy="960" rx="180" ry="38" fill="#eef2ff" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="660" y="967.7" font-size="22" font-weight="600" fill="#1e3a8a" text-anchor="middle">จัดการคำสั่งซื้อ</text>
+<ellipse cx="1020" cy="540" rx="170" ry="38" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="1020" y="547.7" font-size="22" font-weight="600" fill="#065f46" text-anchor="middle">ส่งข้อความ</text>
+<ellipse cx="1020" cy="670" rx="170" ry="52" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="1020" y="663.1750000000001" font-size="21" font-weight="600" fill="#065f46" text-anchor="middle">รับคำตอบจาก</text>
+<text x="1020" y="691.5250000000001" font-size="21" font-weight="600" fill="#065f46" text-anchor="middle">เจ้าหน้าที่หรือแชทบอท</text>
+<circle cx="200" cy="230" r="22" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="200" y1="252" x2="200" y2="300" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="160" y1="268" x2="240" y2="268" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="200" y1="300" x2="168" y2="350" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="200" y1="300" x2="232" y2="350" stroke="#1e293b" stroke-width="3" fill="none"/>
+<text x="200" y="390.4" font-size="24" font-weight="700" fill="#1e293b" text-anchor="middle">เจ้าของร้าน</text>
+<circle cx="200" cy="690" r="22" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="200" y1="712" x2="200" y2="760" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="160" y1="728" x2="240" y2="728" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="200" y1="760" x2="168" y2="810" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="200" y1="760" x2="232" y2="810" stroke="#1e293b" stroke-width="3" fill="none"/>
+<text x="200" y="850.4" font-size="24" font-weight="700" fill="#1e293b" text-anchor="middle">เจ้าหน้าที่</text>
+<circle cx="1420" cy="530" r="22" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1420" y1="552" x2="1420" y2="600" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1380" y1="568" x2="1460" y2="568" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1420" y1="600" x2="1388" y2="650" stroke="#1e293b" stroke-width="3" fill="none"/>
+<line x1="1420" y1="600" x2="1452" y2="650" stroke="#1e293b" stroke-width="3" fill="none"/>
+<text x="1420" y="690.4" font-size="24" font-weight="700" fill="#1e293b" text-anchor="middle">ลูกค้า</text>
+<polyline points="245,268 480,170" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,268 480,265" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,268 480,360" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,268 480,455" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,728 480,580" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,728 480,675" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,728 480,770" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,728 480,865" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="245,728 480,960" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="1375,568 1190,540" fill="none" stroke="#475569" stroke-width="2.5"/>
+<polyline points="1375,568 1190,670" fill="none" stroke="#475569" stroke-width="2.5"/>
+<line x1="200" y1="410" x2="200" y2="664" stroke="#1e293b" stroke-width="2.5" marker-end="url(#gen)"/>
+<text x="215" y="533.5" font-size="20" font-weight="400" fill="#475569" text-anchor="start">ใช้ทุกฟังก์ชัน</text>
+<text x="215" y="560.5" font-size="20" font-weight="400" fill="#475569" text-anchor="start">ของเจ้าหน้าที่ได้</text>
+</svg>

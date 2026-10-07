@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1860" height="1000" viewBox="0 0 1860 1000" font-family="Leelawadee UI, Tahoma, sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+<marker id="ahs" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#475569"/></marker>
+<marker id="gen" viewBox="0 0 20 20" refX="19" refY="10" markerWidth="16" markerHeight="16" orient="auto"><path d="M0,0 L20,10 L0,20 z" fill="#fff" stroke="#1e293b" stroke-width="2"/></marker>
+</defs>
+<rect width="1860" height="1000" fill="#fff"/>
+<rect x="20" y="20" width="1210" height="900" rx="18" fill="#f8fafc" stroke="#059669" stroke-width="3"/>
+<rect x="34" y="34" width="1182" height="56" rx="12" fill="#059669"/>
+<text x="625" y="71.1" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">MySQL</text>
+<rect x="1260" y="20" width="580" height="900" rx="18" fill="#f8fafc" stroke="#0284c7" stroke-width="3"/>
+<rect x="1274" y="34" width="552" height="56" rx="12" fill="#0284c7"/>
+<text x="1550" y="71.1" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">MongoDB</text>
+<rect x="500" y="110" width="220" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="610" y="145" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">tenants</text>
+<rect x="40" y="270" width="200" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="140" y="305" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">businesses</text>
+<rect x="290" y="270" width="200" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="390" y="305" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">tenant_users</text>
+<rect x="520" y="270" width="200" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="620" y="305" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">tenant_roles</text>
+<rect x="750" y="270" width="200" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="850" y="305" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">tenant_tags</text>
+<rect x="980" y="270" width="200" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="1080" y="305" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">customers</text>
+<polyline points="610,166 140,270" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="124" y="265" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="610,166 390,270" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="374" y="265" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="610,166 620,270" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="604" y="265" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="610,166 850,270" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="834" y="265" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="610,166 1080,270" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="1064" y="265" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<text x="628" y="193" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<rect x="200" y="440" width="280" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="340" y="475" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">business_chatbot_settings</text>
+<polyline points="140,326 140,468 200,468" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="186" y="463" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<rect x="200" y="550" width="280" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="340" y="585" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">platform_credentials</text>
+<polyline points="140,326 140,578 200,578" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="186" y="573" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<rect x="200" y="660" width="280" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="340" y="695" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">products</text>
+<polyline points="140,326 140,688 200,688" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="186" y="683" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<rect x="200" y="770" width="280" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="340" y="805" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">automation_rules</text>
+<polyline points="140,326 140,798 200,798" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="186" y="793" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<text x="158" y="353" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<rect x="980" y="480" width="200" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="1080" y="515" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">chat_orders</text>
+<polyline points="1080,326 1080,480" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="1096" y="353" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<text x="1096" y="475" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<rect x="600" y="620" width="290" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+<text x="745" y="655" font-size="20" font-weight="700" fill="#065f46" text-anchor="middle">conversation_assignments</text>
+<polyline points="390,326 745,620" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="408" y="355" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<text x="725" y="613" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<rect x="1300" y="270" width="240" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="1420" y="305" font-size="20" font-weight="700" fill="#075985" text-anchor="middle">conversations</text>
+<rect x="1300" y="480" width="240" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="1420" y="515" font-size="20" font-weight="700" fill="#075985" text-anchor="middle">messages</text>
+<rect x="1570" y="270" width="240" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="1690" y="305" font-size="20" font-weight="700" fill="#075985" text-anchor="middle">knowledge_documents</text>
+<rect x="1570" y="480" width="240" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="1690" y="515" font-size="20" font-weight="700" fill="#075985" text-anchor="middle">knowledge_chunks</text>
+<rect x="1570" y="690" width="240" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="1690" y="725" font-size="20" font-weight="700" fill="#075985" text-anchor="middle">device_tokens</text>
+<polyline points="1420,326 1420,480" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="1436" y="353" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<text x="1436" y="475" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="1690,326 1690,480" fill="none" stroke="#475569" stroke-width="2.5"/>
+<text x="1706" y="353" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<text x="1706" y="475" font-size="20" font-weight="700" fill="#b45309" text-anchor="middle" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="1180,285 1300,285" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="1194" y="279" font-size="20" font-weight="700" fill="#b45309" text-anchor="start" stroke="#fff" stroke-width="7" paint-order="stroke">1</text>
+<text x="1286" y="279" font-size="20" font-weight="700" fill="#b45309" text-anchor="end" stroke="#fff" stroke-width="7" paint-order="stroke">N</text>
+<polyline points="1180,508 1240,508 1240,303 1300,303" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="10 7"/>
+<polyline points="890,648 1250,648 1250,316 1300,316" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="10 7"/>
+<line x1="40" y1="960" x2="110" y2="960" stroke="#475569" stroke-width="2.5"/>
+<text x="125" y="967.35" font-size="21" font-weight="400" fill="#1e293b" text-anchor="start">ความสัมพันธ์ภายในฐานข้อมูลเดียวกัน</text>
+<line x1="640" y1="960" x2="710" y2="960" stroke="#d97706" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="725" y="967.35" font-size="21" font-weight="400" fill="#1e293b" text-anchor="start">อ้างอิงข้ามฐานข้อมูลด้วยรหัส (ระบบหลังบ้านตรวจความถูกต้องเอง)</text>
+<text x="1820" y="967.35" font-size="21" font-weight="400" fill="#b45309" text-anchor="end">1 / N = จำนวนความสัมพันธ์</text>
+</svg>
