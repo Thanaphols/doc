@@ -1,9 +1,27 @@
-# One entry per line, APA 7th per the RMUTI guide (2566) section 3.2.
-# Order: Thai entries first (ก-ฮ), then English (A-Z). *text* = italic.
-# Thai format example (book): ชื่อ สกุล. (ปีพิมพ์). *ชื่อเรื่อง*. สำนักพิมพ์.
-Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T., Child, R., Ramesh, A., Ziegler, D. M., Wu, J., Winter, C., ... Amodei, D. (2020). Language models are few-shot learners. In H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, & H. Lin (Eds.), *Advances in neural information processing systems 33* (pp. 1877–1901). Curran Associates.
-Fowler, M. (2011, November 16). *PolyglotPersistence*. martinfowler.com. https://martinfowler.com/bliki/PolyglotPersistence.html
-Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. In H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, & H. Lin (Eds.), *Advances in neural information processing systems 33* (pp. 9459–9474). Curran Associates.
-LY Corporation. (n.d.). *Get started with the Messaging API*. LINE Developers. https://developers.line.biz/en/docs/messaging-api/getting-started/
-Mikolov, T., Sutskever, I., Chen, K., Corrado, G. S., & Dean, J. (2013). Distributed representations of words and phrases and their compositionality. In C. J. C. Burges, L. Bottou, M. Welling, Z. Ghahramani, & K. Q. Weinberger (Eds.), *Advances in neural information processing systems 26* (pp. 3111–3119). Curran Associates.
-Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention is all you need. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, & R. Garnett (Eds.), *Advances in neural information processing systems 30* (pp. 5998–6008). Curran Associates.
+[1]	Google Developers, “Flutter architectural overview,” [ออนไลน์]. Flutter เว็บไซต์: https://docs.flutter.dev/resources/architectural-overview (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[2]	Dart, “Dart overview,” [ออนไลน์]. Dart เว็บไซต์: https://dart.dev/overview (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[3]	Riverpod, “Riverpod documentation,” [ออนไลน์]. Riverpod เว็บไซต์: https://riverpod.dev/docs/introduction/getting_started (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[4]	Flutter Community, “go_router package,” [ออนไลน์]. pub.dev เว็บไซต์: https://pub.dev/packages/go_router (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[5]	Laravel, “Laravel documentation,” [ออนไลน์]. Laravel เว็บไซต์: https://laravel.com/docs/10.x (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[6]	KongRuksiam Studio, “รู้จักกับ API และ REST API,” [ออนไลน์]. kongruksiam เว็บไซต์: https://kongruksiam.medium.com/ (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[7]	D. Hardt, “The OAuth 2.0 Authorization Framework,” RFC 6749, Internet Engineering Task Force (IETF), [ออนไลน์]. เว็บไซต์: https://datatracker.ietf.org/doc/html/rfc6749 (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[8]	LINE Developers, “Messaging API overview,” [ออนไลน์]. LINE Developers เว็บไซต์: https://developers.line.biz/en/docs/messaging-api/ (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[9]	Meta for Developers, “Messenger Platform Overview,” [ออนไลน์]. Meta เว็บไซต์: https://developers.facebook.com/docs/messenger-platform (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[10]	GitHub Docs, “About webhooks,” [ออนไลน์]. GitHub เว็บไซต์: https://docs.github.com/en/webhooks/about-webhooks (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[11]	Laravel, “Queues and Task Scheduling,” [ออนไลน์]. Laravel เว็บไซต์: https://laravel.com/docs/10.x/queues (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[12]	Laravel, “Laravel Reverb,” [ออนไลน์]. Laravel เว็บไซต์: https://laravel.com/docs/11.x/reverb (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[13]	Google Firebase, “Firebase Cloud Messaging,” [ออนไลน์]. Firebase เว็บไซต์: https://firebase.google.com/docs/cloud-messaging (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[14]	Amazon Web Services, “MySQL คืออะไร,” [ออนไลน์]. Amazon Web Services เว็บไซต์: https://aws.amazon.com/th/rds/mysql/what-is-mysql/ (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[15]	MongoDB, “MongoDB documentation,” [ออนไลน์]. MongoDB เว็บไซต์: https://www.mongodb.com/docs/ (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[16]	M. Fowler, “PolyglotPersistence,” [ออนไลน์]. martinfowler.com เว็บไซต์: https://martinfowler.com/bliki/PolyglotPersistence.html (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[17]	Microsoft Learn, “Multi-tenant SaaS database tenancy patterns,” [ออนไลน์]. Microsoft เว็บไซต์: https://learn.microsoft.com/en-us/azure/azure-sql/database/saas-tenancy-app-design-patterns (เข้าถึงเมื่อ: 10 มีนาคม 2567).
+[18]	D. F. Ferraiolo, R. Sandhu, S. Gavrila, D. R. Kuhn, and R. Chandramouli, “Proposed NIST standard for role-based access control,” *ACM Transactions on Information and System Security*, vol. 4, no. 3, pp. 224–274, 2001.
+[19]	E. Adamopoulou and L. Moussiades, “An overview of chatbot technology,” in *IFIP International Conference on Artificial Intelligence Applications and Innovations*, pp. 373–383, 2020.
+[20]	A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin, “Attention is all you need,” in *Advances in Neural Information Processing Systems 30*, pp. 5998–6008, 2017.
+[21]	T. B. Brown, B. Mann, N. Ryder, M. Subbiah, J. Kaplan, P. Dhariwal, and D. Amodei, “Language models are few-shot learners,” in *Advances in Neural Information Processing Systems 33*, pp. 1877–1901, 2020.
+[22]	P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal, and D. Kiela, “Retrieval-augmented generation for knowledge-intensive NLP tasks,” in *Advances in Neural Information Processing Systems 33*, pp. 9459–9474, 2020.
+[23]	T. Mikolov, I. Sutskever, K. Chen, G. S. Corrado, and J. Dean, “Distributed representations of words and phrases and their compositionality,” in *Advances in Neural Information Processing Systems 26*, pp. 3111–3119, 2013.
+[24]	ฑัณฑิกา นันยากรสกุล, “ระบบแช็ตบอตและการวิเคราะห์ข้อมูลขั้นสูงของธุรกิจบริการจัดส่งพัสดุไปต่างประเทศ,” สารนิพนธ์ วท.ม. (เทคโนโลยีสารสนเทศและระบบการจัดการ), จุฬาลงกรณ์มหาวิทยาลัย, กรุงเทพฯ, 2562.
+[25]	ปาลิตา อนันตนิติเวทย์, “การพัฒนาเว็บแอปพลิเคชันและแช็ตบอตของธุรกิจขายเสื้อผ้า,” สารนิพนธ์ วท.ม. (เทคโนโลยีสารสนเทศและระบบการจัดการ), จุฬาลงกรณ์มหาวิทยาลัย, กรุงเทพฯ, 2562.
+[26]	เสริมศิริ นวลลิขิต, “การพัฒนาระบบแชตบอตสำหรับธุรกิจจำหน่ายบรรจุภัณฑ์ไปรษณีย์,” สารนิพนธ์ วท.ม. (เทคโนโลยีสารสนเทศและระบบการจัดการ), จุฬาลงกรณ์มหาวิทยาลัย, กรุงเทพฯ, 2565.
+[27]	J. M. Sanchez, “Facebook Messenger chatbots: How businesses can benefit from this opportunity,” Master's thesis, School of Industrial and Information Engineering, Politecnico di Milano, Milan, Italy, 2019.

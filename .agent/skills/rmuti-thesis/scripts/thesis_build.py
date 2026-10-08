@@ -63,14 +63,39 @@ def add_caption(container, label, chapter, text, align):
 
 
 def add_figure(doc, chapter, title):
+    seq_no = doc._seq.get("รูปที่", 0) + 1
+    candidates = [
+        os.path.join(ROOT, "input", "figures", f"ch{chapter}", f"{chapter}.{seq_no}.png"),
+        os.path.join(ROOT, "input", "figures", f"ch{chapter}", f"{seq_no}.png"),
+        os.path.join(ROOT, "input", "figures", f"{chapter}.{seq_no}.png"),
+        os.path.join(ROOT, "input", "figures", f"ch{chapter}", f"{chapter}.{seq_no}.jpg"),
+    ]
+    img_path = next((p for p in candidates if os.path.exists(p)), None)
+
     box = doc.add_table(rows=1, cols=1)
-    box.style = "Table Grid"
+    tblBorders = OxmlElement("w:tblBorders")
+    for b in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        el = OxmlElement(f"w:{b}")
+        el.set(qn("w:val"), "none")
+        el.set(qn("w:sz"), "0")
+        el.set(qn("w:space"), "0")
+        el.set(qn("w:color"), "auto")
+        tblBorders.append(el)
+    box._tbl.tblPr.append(tblBorders)
+
     cell = box.rows[0].cells[0]
+    cell.width = Cm(14.65)
     ph = cell.paragraphs[0]
     ph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    ph.add_run(f"[ใส่รูป: {title}]")
+    if img_path:
+        run = ph.add_run()
+        run.add_picture(img_path, width=Cm(13.0))
+    else:
+        ph.add_run(f"[ใส่รูป: {title}]")
     cell._seq = doc._seq
-    add_caption(cell, "รูปที่", chapter, title, WD_ALIGN_PARAGRAPH.CENTER)
+    p_cap = add_caption(cell, "รูปที่", chapter, title, WD_ALIGN_PARAGRAPH.CENTER)
+    p_cap.paragraph_format.space_before = Pt(4)
+    p_cap.paragraph_format.space_after = Pt(6)
     doc.add_paragraph()
 
 
@@ -182,8 +207,8 @@ def build_doc(lines):
             doc.add_paragraph("			" + line)
             continue
         if line == "@toc":
-            for i, t in enumerate(topics, 1):
-                p = doc.add_paragraph(f"{chapter}.{i} {t}")
+            for topic_idx, t in enumerate(topics, 1):
+                p = doc.add_paragraph(f"{chapter}.{topic_idx} {t}")
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 p.paragraph_format.left_indent = Cm(1.27)
             continue
@@ -291,8 +316,72 @@ def render_pngs(pdf_path, stem):
     return len(pdf)
 
 
+def build_bib(argv):
+    bib_path = os.path.join(ROOT, "input", "chapters", "bib.txt")
+    with open(bib_path, encoding="utf-8") as f:
+        raw_lines = [l.strip() for l in f if l.strip() and not l.startswith("#")]
+
+    doc = docx.Document(TEMPLATE)
+    for el in list(doc.element.body):
+        if el.tag != qn("w:sectPr"):
+            doc.element.body.remove(el)
+
+    s = doc.sections[0]
+    s.top_margin = Cm(3.81)
+
+    # Heading: บรรณานุกรม
+    h = doc.add_paragraph()
+    h.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    h.paragraph_format.space_before = Pt(36)
+    h.paragraph_format.space_after = Pt(16)
+    r = h.add_run("บรรณานุกรม")
+    r.bold = True
+    mark_thai(r)
+
+    # Entries
+    for line in raw_lines:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        p.paragraph_format.space_after = Pt(0)
+        p.paragraph_format.space_before = Pt(0)
+        p.paragraph_format.line_spacing = 1.0
+        pPr = p._p.get_or_add_pPr()
+        ind = OxmlElement("w:ind")
+        ind.set(qn("w:left"), "720")
+        ind.set(qn("w:hanging"), "720")
+        pPr.append(ind)
+
+        # Parse *italic*
+        tokens = line.split("*")
+        for idx, token in enumerate(tokens):
+            if not token:
+                continue
+            run = p.add_run(token)
+            if idx % 2 == 1:
+                run.italic = True
+            mark_thai(run)
+
+    stem = "Chatshop_บรรณานุกรม"
+    out = os.path.join(ROOT, "output", stem + ".docx")
+    try:
+        doc.save(out)
+    except PermissionError:
+        out = os.path.join(ROOT, "output", stem + "_new.docx")
+        doc.save(out)
+        print("Target open in Word, saved instead to", out)
+    print("docx:", out)
+    if "--no-pdf" in argv:
+        return
+    pdf = os.path.join(ROOT, "output", stem + ".pdf")
+    export_pdf(out, pdf)
+    print(f"pdf: {pdf} ({render_pngs(pdf, stem)} pages, previews in process/temp/)")
+
+
 def main(argv):
     n = argv[1]
+    if n == "bib":
+        build_bib(argv)
+        return
     with open(os.path.join(ROOT, "input", "chapters", f"ch{n}.txt"), encoding="utf-8") as f:
         doc, chapter, title = build_doc(f.readlines())
     check(doc)
@@ -316,3 +405,4 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv)
+
