@@ -41,7 +41,7 @@ TEXT_CM, PAGE_COL_CM = 14.65, 1.5
 
 TH_TITLE = "แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อ\nสำหรับธุรกิจออนไลน์"
 EN_TITLE = "Centralized Chat and Order Management\nApplication for Online Business"
-ADVISOR_TH, ADVISOR_EN = "อาจารย์ ชัย วันคัน", "Chai Wankan, Ph.D."  # the only advisor and committee member
+ADVISOR_TH, ADVISOR_EN = "ผู้ช่วยศาสตราจารย์ ดร.อติราช  สุขสวัสดิ์", "Assistant Professor, Atirarj Suksawad, D.Eng"  # thesis advisor
 AUTHOR_TH, AUTHOR_EN = "ธนพล  วุฒิธาดา", "Thanaphol  Wuttitada"
 
 
