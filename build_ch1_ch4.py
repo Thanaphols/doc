@@ -15,8 +15,9 @@ def main():
     shutil.copy2(SRC_1_3, OUT_DOCX)
     
     print("Merging Chapter 4 via Word COM...")
-    word = win32com.client.Dispatch("Word.Application")
+    word = win32com.client.DispatchEx("Word.Application")  # own instance, never the user's open Word
     word.Visible = False
+    word.DisplayAlerts = 0  # no hidden modal dialogs
     try:
         doc = word.Documents.Open(os.path.abspath(OUT_DOCX))
         rng = doc.Content

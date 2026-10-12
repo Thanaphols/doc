@@ -1,8 +1,9 @@
 import win32com.client, os, sys
 sys.stdout.reconfigure(encoding='utf-8')
 
-word = win32com.client.Dispatch('Word.Application')
+word = win32com.client.DispatchEx('Word.Application')  # own instance, never the user's open Word
 word.Visible = False
+word.DisplayAlerts = 0  # no hidden modal dialogs
 try:
     docx_path = os.path.abspath('output/Chatshop_ฉบับรวม5บท.docx')
     pdf_path = os.path.abspath('output/Chatshop_ฉบับรวม5บท.pdf')

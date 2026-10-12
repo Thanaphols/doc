@@ -574,8 +574,9 @@ def build_toc():
     print(f"Saved: {out_docx} and {out_pdf}")
 
 def export_pdf(docx_path, pdf_path):
-    word = win32com.client.Dispatch("Word.Application")
+    word = win32com.client.DispatchEx("Word.Application")  # own instance, never the user's open Word
     word.Visible = False
+    word.DisplayAlerts = 0  # no hidden modal dialogs
     try:
         d = word.Documents.Open(os.path.abspath(docx_path))
         d.Fields.Update()

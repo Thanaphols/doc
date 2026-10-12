@@ -220,8 +220,9 @@ def main():
 
     # Export to PDF via Word COM
     import win32com.client
-    word = win32com.client.Dispatch("Word.Application")
+    word = win32com.client.DispatchEx("Word.Application")  # own instance, never the user's open Word
     word.Visible = False
+    word.DisplayAlerts = 0  # no hidden modal dialogs
     try:
         d = word.Documents.Open(os.path.abspath(out_docx))
         d.Fields.Update()

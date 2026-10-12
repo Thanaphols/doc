@@ -99,6 +99,51 @@ def add_figure(doc, chapter, title):
     doc.add_paragraph()
 
 
+A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
+PIC = "{http://schemas.openxmlformats.org/drawingml/2006/picture}"
+
+
+def normalize_figures(doc):
+    """House style for figures (as the author fixed by hand): the picture has a
+    thin black outline, the 1x1 table holding it has no borders at all."""
+    for tbl in doc.element.body.iter(qn("w:tbl")):
+        if tbl.find(".//" + PIC + "pic") is None:
+            continue
+        tblPr = tbl.tblPr
+        if tblPr.find(qn("w:tblStyle")) is None:
+            st = OxmlElement("w:tblStyle")
+            st.set(qn("w:val"), "TableGrid")
+            tblPr.insert(0, st)
+        for old in tblPr.findall(qn("w:tblBorders")):
+            tblPr.remove(old)
+        b = OxmlElement("w:tblBorders")
+        for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
+            el = OxmlElement(f"w:{side}")
+            el.set(qn("w:val"), "none")
+            el.set(qn("w:sz"), "0")
+            el.set(qn("w:space"), "0")
+            el.set(qn("w:color"), "auto")
+            b.append(el)
+        # schema order inside tblPr: ... tblW, jc, tblCellSpacing, tblInd, tblBorders, shd, tblLayout ...
+        after = next((tblPr.find(qn(t)) for t in ("w:shd", "w:tblLayout", "w:tblCellMar", "w:tblLook")
+                      if tblPr.find(qn(t)) is not None), None)
+        (after.addprevious if after is not None else tblPr.append)(b)
+        for tcb in tbl.iter(qn("w:tcBorders")):
+            tcb.getparent().remove(tcb)
+    for spPr in doc.element.body.iter(PIC + "spPr"):
+        if spPr.find(A + "ln") is not None:
+            continue
+        ln = OxmlElement("a:ln")
+        fill = OxmlElement("a:solidFill")
+        clr = OxmlElement("a:schemeClr")
+        clr.set("val", "tx1")
+        fill.append(clr)
+        ln.append(fill)
+        # a:ln comes after xfrm / geometry / fill, before effects
+        nxt = next((c for c in spPr if c.tag in (A + "effectLst", A + "effectDag", A + "scene3d", A + "sp3d", A + "extLst")), None)
+        (nxt.addprevious if nxt is not None else spPr.append)(ln)
+
+
 def add_data_table(doc, chapter, title, rows):
     add_caption(doc, "ตารางที่", chapter, title, WD_ALIGN_PARAGRAPH.LEFT)
     cells = [[c.strip() for c in r.split("|")] for r in rows]
@@ -137,6 +182,173 @@ def mark_thai(run):
     rPr.insert(0, fonts)
     rPr.append(OxmlElement("w:cs"))
     rPr.append(lang)
+
+
+def split_docx_table(doc, tbl_index, split_after_row, cont_caption_text, style="Caption"):
+    """Split doc.tables[tbl_index] after data row split_after_row. The second
+    part starts a new page under "<caption> (ต่อ)" and repeats header row 0."""
+    import copy
+    t = doc.tables[tbl_index]
+    parent = t._tbl.getparent()
+    idx = parent.index(t._tbl)
+    tbl2 = copy.deepcopy(t._tbl)
+    t2 = docx.table.Table(tbl2, doc)
+    keep = split_after_row + 1  # header + rows 1..split_after_row
+    for _ in range(len(t.rows) - keep):
+        t._tbl.remove(t.rows[keep]._tr)
+    for _ in range(split_after_row):
+        t2._tbl.remove(t2.rows[1]._tr)
+
+    p = docx.text.paragraph.Paragraph(OxmlElement("w:p"), doc)
+    p.style = style
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    pf = p.paragraph_format
+    pf.space_before = pf.space_after = Pt(0)
+    pf.keep_with_next = True
+    pf.page_break_before = True
+    r = p.add_run(cont_caption_text)
+    r.bold = True
+    mark_thai(r)
+    parent.insert(idx + 1, p._p)
+    parent.insert(idx + 2, tbl2)
+
+
+def unsplit_tables(doc):
+    """Undo earlier split_tables runs: "<caption> (ต่อ)" + its table go back into the
+    table above (minus the repeated header row). A chapter's page breaks change once
+    it sits in the book, so it must be split again on the final layout, not twice."""
+    joined = 0
+    for p in list(doc.paragraphs):
+        if not (p.text.strip().startswith("ตารางที่") and p.text.strip().endswith("(ต่อ)")):
+            continue
+        prev, nxt = p._p.getprevious(), p._p.getnext()
+        if prev is None or nxt is None or prev.tag != qn("w:tbl") or nxt.tag != qn("w:tbl"):
+            continue
+        for tr in nxt.findall(qn("w:tr"))[1:]:
+            prev.append(tr)
+        nxt.getparent().remove(nxt)
+        p._p.getparent().remove(p._p)
+        joined += 1
+    return joined
+
+
+def _pic_count(doc):
+    xml = doc.element.body.xml
+    return xml.count("<pic:pic"), xml.count("<w:drawing")
+
+
+def _captioned_tables(doc):
+    """[(table index, "ตารางที่ N.k  ชื่อ")] for data tables (caption paragraph
+    right before them). Figure boxes have no caption before them and are skipped.
+    N comes from the caption itself, so a merged multi-chapter file works too."""
+    out, chapter, k, title = [], None, 0, ""
+    for i, t in enumerate(doc.tables):
+        prev = t._tbl.getprevious()
+        if prev is None or prev.tag != qn("w:p"):
+            continue
+        text = docx.text.paragraph.Paragraph(prev, doc).text.strip()
+        m = re.match(r"ตารางที่ (\d+)\.", text)
+        if not m:
+            continue
+        if text.endswith("(ต่อ)"):  # part of a table already split: same number/title
+            out.append((i, f"ตารางที่ {chapter}.{k}  {title}"))
+            continue
+        if m.group(1) != chapter:
+            chapter, k = m.group(1), 0
+        k += 1
+        title = text.split("  ", 1)[1].strip() if "  " in text else text
+        out.append((i, f"ตารางที่ {chapter}.{k}  {title}"))
+    return out
+
+
+def _save(doc, path, tries=10):
+    """Word releases a file a moment after Document.Close; retry the save."""
+    import time
+    for n in range(tries):
+        try:
+            return doc.save(path)
+        except OSError:
+            if n == tries - 1:
+                raise
+            time.sleep(1)
+
+
+def _open(path, tries=10):
+    """Word releases a file a moment after Document.Close; retry the open."""
+    import time
+    for n in range(tries):
+        try:
+            return docx.Document(path)
+        except OSError:
+            if n == tries - 1:
+                raise
+            time.sleep(1)
+
+
+def split_tables(docx_path, max_rounds=40):
+    """Make every captioned table that runs past a page end continue on the next
+    page under "ตารางที่ N.n  ชื่อ (ต่อ)" + repeated header (RMUTI rule).
+    Word paginates; python-docx splits one table per round, then re-measures.
+    Returns the number of splits. Refuses to save if any picture would be lost."""
+    import win32com.client
+    path = os.path.abspath(docx_path)
+    doc = _open(path)
+    pics = _pic_count(doc)
+    for i, _ in _captioned_tables(doc):
+        t = doc.tables[i]
+        for row in t.rows:  # never break a single row across pages
+            trPr = row._tr.get_or_add_trPr()
+            if trPr.find(qn("w:cantSplit")) is None:
+                trPr.append(OxmlElement("w:cantSplit"))
+        # caption + header row + first data row stay on one page
+        docx.text.paragraph.Paragraph(t._tbl.getprevious(), doc).paragraph_format.keep_with_next = True
+        for cell in t.rows[0].cells:
+            for p in cell.paragraphs:
+                p.paragraph_format.keep_with_next = True
+    _save(doc, path)
+
+    word = win32com.client.DispatchEx("Word.Application")  # own instance, never the user's open Word
+    word.Visible = False
+    word.DisplayAlerts = 0  # no hidden modal dialogs
+    splits = 0
+    try:
+        for _ in range(max_rounds):
+            d = word.Documents.Open(path)
+            d.Repaginate()
+            hit = None
+            for i, caption in _captioned_tables(doc):
+                tbl = d.Tables(i + 1)
+                rows = tbl.Rows
+                first = rows(1).Range.Information(3)  # wdActiveEndPageNumber
+                cap = tbl.Range.Paragraphs(1).Previous(1).Range.Information(3)
+                if cap != first or (rows.Count > 1 and rows(2).Range.Information(3) != first):
+                    print(f"WARN {caption}: caption/header not on the same page as the first row")
+                for r in range(3, rows.Count + 1):  # keep >= 1 data row on the first page
+                    if rows(r).Range.Information(3) > first:
+                        hit = (i, r - 2, caption)
+                        break
+                if hit:
+                    break
+            d.Close(False)
+            if not hit:
+                return splits
+            i, keep, caption = hit
+            cap_p = docx.text.paragraph.Paragraph(doc.tables[i]._tbl.getprevious(), doc)
+            if keep < 2 and not cap_p.paragraph_format.page_break_before:
+                # one lone row on the page looks broken: move the whole table to the next page
+                cap_p.paragraph_format.page_break_before = True
+                _save(doc, path)
+                print(f"moved {caption} to the next page")
+                continue
+            split_docx_table(doc, i, keep, caption + " (ต่อ)")
+            if _pic_count(doc) != pics:
+                raise RuntimeError(f"pictures changed {pics} -> {_pic_count(doc)}, not saved")
+            _save(doc, path)
+            splits += 1
+            print(f"split {caption} after data row {keep}")
+        raise RuntimeError(f"tables still overflow after {max_rounds} rounds")
+    finally:
+        word.Quit()
 
 
 def start_chapter_numbering(doc, chapter):
@@ -231,6 +443,7 @@ def build_doc(lines):
     for p in all_paragraphs(doc):
         for r in p.runs:
             mark_thai(r)
+    normalize_figures(doc)
     return doc, chapter, title
 
 
@@ -296,8 +509,9 @@ def short_last_lines(doc, min_fill=0.4):
 
 def export_pdf(docx_path, pdf_path):
     import win32com.client
-    word = win32com.client.Dispatch("Word.Application")
+    word = win32com.client.DispatchEx("Word.Application")  # own instance, never the user's open Word
     word.Visible = False
+    word.DisplayAlerts = 0  # no hidden modal dialogs
     try:
         d = word.Documents.Open(docx_path)
         d.SaveAs(pdf_path, FileFormat=17)
@@ -335,7 +549,7 @@ def build_bib(argv):
     h.paragraph_format.space_before = Pt(36)
     h.paragraph_format.space_after = Pt(16)
     r = h.add_run("บรรณานุกรม")
-    r.bold = True
+    r.bold = r.font.cs_bold = True  # Thai text is bolded by bCs
     mark_thai(r)
 
     # Entries
@@ -398,6 +612,7 @@ def main(argv):
     print("docx:", out)
     if "--no-pdf" in argv:
         return
+    split_tables(out)
     pdf = os.path.join(ROOT, "output", stem + ".pdf")
     export_pdf(out, pdf)
     print(f"pdf: {pdf} ({render_pngs(pdf, stem)} pages, previews in process/temp/)")
