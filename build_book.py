@@ -27,7 +27,11 @@ TMP = os.path.join(ROOT, "process", "temp")
 SAMPLE = os.path.join(ROOT, "input", "reference", "01 ปกนอก ถึง กิตติกรรมประกาศ.docx")
 BODY_SRC = os.path.join(TMP, "Chatshop_บทที่1_5.docx")  # written by build_ch1_ch5
 from build_ch1_ch5 import src  # noqa: E402  output/ or output/old/
+if not os.path.exists(BODY_SRC):
+    BODY_SRC = src("Chatshop_บทที่1_5.docx")
 BIB_SRC = src("Chatshop_บรรณานุกรม.docx")
+APPENDIX_A_SRC = src("Chatshop_ภาคผนวกก_คู่มือ.docx")
+BIO_SRC = src("Chatshop_ประวัติผู้เขียน.docx")
 FRONT = os.path.join(TMP, "book_front.docx")
 BODY = os.path.join(TMP, "book_body.docx")
 BOOK = os.path.join(OUT, "Chatshop_ปริญญานิพนธ์ฉบับสมบูรณ์_v5.docx")
@@ -42,6 +46,8 @@ TEXT_CM, PAGE_COL_CM = 14.65, 1.5
 TH_TITLE = "แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อ\nสำหรับธุรกิจออนไลน์"
 EN_TITLE = "Centralized Chat and Order Management\nApplication for Online Business"
 ADVISOR_TH, ADVISOR_EN = "ผู้ช่วยศาสตราจารย์ ดร.อติราช  สุขสวัสดิ์", "Assistant Professor, Atirarj Suksawad, D.Eng"  # thesis advisor
+CHAIR_EXAM_TH = "ผู้ช่วยศาสตราจารย์ ดร.จักรพนธ์  อบมา"
+COMMITTEE_TH = "อาจารย์ ดร.ประภาส  ผ่องสนาม"
 AUTHOR_TH, AUTHOR_EN = "ธนพล  วุฒิธาดา", "Thanaphol  Wuttitada"
 
 
@@ -92,7 +98,7 @@ def fill_front(doc):
     abs_en = [t for t in allp if not t.startswith(("คำสำคัญ", "Keywords")) and t.isascii()]
     kw_th = next(t for t in allp if t.startswith("คำสำคัญ")).split(":", 1)[1].strip()
     kw_en = next(t for t in allp if t.startswith("Keywords")).split(":", 1)[1].strip()
-    ack = [t.replace("อาจารย์ ดร.ประภาส ผ่องสนาม", ADVISOR_TH)
+    ack = [t.replace("อาจารย์ ดร.ประภาส  ผ่องสนาม", ADVISOR_TH).replace("อาจารย์ ดร.ประภาส ผ่องสนาม", ADVISOR_TH)
            for t in body_paras(src("Chatshop_กิตติกรรมประกาศ.docx"))]
     fix = lambda t: t.replace("แชทบอทอัจฉริยะ", "แชทบอท").replace("an intelligent chatbot", "a chatbot")
     abs_th, abs_en = [fix(t) for t in abs_th], [fix(t) for t in abs_en]
@@ -137,14 +143,14 @@ def fill_front(doc):
         set_text(ps[i], t)
     assert ps[112].text.rstrip().endswith("คณบดีคณะวิศวกรรมศาสตร"), ps[112].text
     set_text(ps[112], ps[112].text.rstrip() + "์")  # sample typo: missing the final ์
-    # committee: one signature, right-aligned (the advisor is the whole committee)
+    # committee: 3 signatures (Chair left / Advisor right / Member bottom-left)
     assert "ประธานกรรมการสอบ" in ps[118].text and ps[125].text.strip().startswith("("), (ps[118].text, ps[125].text)
-    for i, t in ((118, "................................................ประธานที่ปรึกษา"), (119, f"({ADVISOR_TH})")):
-        set_text(ps[i], t)
-        ps[i].alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        ps[i].paragraph_format.left_indent = ps[i].paragraph_format.first_line_indent = Cm(0)
-    # bottom-up keeps earlier indexes valid: extra abstract/ack paragraphs, then committee lines 120-125
-    for i in (166, 157, 140, 125, 124, 123, 122, 121, 120):
+    set_text(ps[118], ".............................................ประธานกรรมการสอบ\t................................................ประธานที่ปรึกษา")
+    set_text(ps[119], f"({CHAIR_EXAM_TH})\t\t({ADVISOR_TH})")
+    set_text(ps[121], ".............................................กรรมการ\t\t")
+    set_text(ps[122], f"({COMMITTEE_TH})\t\t\t  ")
+    # bottom-up keeps earlier indexes valid: extra abstract/ack paragraphs, then 4th signature lines 123-125
+    for i in (166, 157, 140, 125, 124, 123):
         drop(ps[i])
 
 
@@ -366,6 +372,39 @@ def build_body():
                 (tables if text.startswith("ตาราง") else figures).append(
                     (text.replace("  ", " "), str(p.Range.Information(3)), 0))
         last = d.ComputeStatistics(2)
+
+        # Wire Appendix divider, Appendix A, and Author Bio after bibliography
+        if os.path.exists(APPENDIX_A_SRC):
+            # Divider page "ภาคผนวก"
+            rng = d.Content
+            rng.Collapse(0)
+            rng.InsertBreak(2)  # section break, next page
+            rng.Collapse(0)
+            p = rng.Paragraphs.Add()
+            p.Range.Text = "ภาคผนวก\r"
+            p.Range.ParagraphFormat.Alignment = 1  # Center
+            p.Range.ParagraphFormat.SpaceBefore = 240
+            p.Range.Font.Name = "TH SarabunPSK"
+            p.Range.Font.NameBi = "TH SarabunPSK"
+            p.Range.Font.Size = 16
+            p.Range.Font.SizeBi = 16
+            p.Range.Font.Bold = True
+
+            # Appendix A: คู่มือการใช้งานแอปพลิเคชัน
+            rng = d.Content
+            rng.Collapse(0)
+            rng.InsertBreak(2)  # section break, next page
+            rng.Collapse(0)
+            rng.InsertFile(APPENDIX_A_SRC)
+
+        if os.path.exists(BIO_SRC):
+            # Author bio: ประวัติผู้เขียน
+            rng = d.Content
+            rng.Collapse(0)
+            rng.InsertBreak(2)  # section break, next page
+            rng.Collapse(0)
+            rng.InsertFile(BIO_SRC)
+
         d.Save()
         d.Close(False)
     finally:
@@ -413,7 +452,10 @@ def merge_and_number(n_front_sections):
                 pn.RestartNumberingAtSection = False
             else:
                 first = s.Range.Paragraphs(1).Range
-                starts_chapter = first.ParagraphFormat.OutlineLevel == 1 or first.Text.strip() == "บรรณานุกรม"
+                txt = first.Text.strip()
+                starts_chapter = (first.ParagraphFormat.OutlineLevel == 1 or
+                                  txt in ("บรรณานุกรม", "ภาคผนวก", "ภาคผนวก ก", "ประวัติผู้เขียน") or
+                                  txt.startswith(("บทที่", "ภาคผนวก")))
                 show_first, show_rest = not starts_chapter, True
                 pn.NumberStyle = 0  # arabic
                 pn.RestartNumberingAtSection = i == n_front_sections + 1

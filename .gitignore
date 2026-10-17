@@ -3,6 +3,11 @@
 
 # Process temp files (renders, caches, analysis text dumps)
 process/temp/
+scratch/
+output/pdf_preview/
+page_*.png
+v7_fig2_1.png
+*.bak
 
 # Python bytecode
 __pycache__/

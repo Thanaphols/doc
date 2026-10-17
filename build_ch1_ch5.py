@@ -53,6 +53,45 @@ def prepare_ch3():
     doc = docx.Document(path)
     print("  rejoined split tables:", unsplit_tables(doc))  # re-split once on the book layout
 
+    # Remove any internal paragraph-level sectPr (from old senior template page-1 break)
+    for p in doc.paragraphs:
+        if p._p.pPr is not None:
+            for sp in p._p.pPr.findall(qn("w:sectPr")):
+                p._p.pPr.remove(sp)
+
+    # Add transition line after 3.8 in the topic list if not present
+    for p in doc.paragraphs:
+        if p.text.strip() == "3.8 การตั้งค่าแพลตฟอร์มภายนอก":
+            nxt = p._p.getnext()
+            nxt_txt = docx.text.paragraph.Paragraph(nxt, doc).text.strip() if nxt is not None and nxt.tag == qn("w:p") else ""
+            if "ซึ่งแต่ละหัวข้อมีรายละเอียดดังต่อไปนี้" not in nxt_txt:
+                ch4_comparison.clone_after(p._p, doc.paragraphs[1], "\tซึ่งแต่ละหัวข้อมีรายละเอียดดังต่อไปนี้")
+            break
+
+    # Convert accidental Heading 3 items in Ch3 to Normal with \t3.X.X prefix (RMUTI rule for Ch2+)
+    h2_idx = 0
+    h3_idx = 0
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 2":
+            h2_idx += 1
+            h3_idx = 0
+        elif p.style.name == "Normal":
+            m = re.match(r"^\t*3\.(\d+)\.(\d+)\s", p.text)
+            if m and int(m.group(1)) == h2_idx:
+                h3_idx = int(m.group(2))
+        elif p.style.name == "Heading 3":
+            h3_idx += 1
+            p.style = doc.styles["Normal"]
+            txt = p.text.lstrip("\t ")
+            runs = [r for r in p.runs if r.text]
+            if runs:
+                runs[0].text = f"\t3.{h2_idx}.{h3_idx} {txt}"
+                for r in runs[1:]:
+                    r.text = ""
+                for r in p.runs:
+                    r.bold = None
+                    mark_thai(r)
+
     # Overflowing tables are split after merging (thesis_build.split_tables)
     doc.save(dst)
     print(f"Saved prepared Chapter 3: {dst}")
@@ -64,6 +103,13 @@ def prepare_ch4():
     print(f"Preparing Chapter 4 from {path}...")
     doc = docx.Document(path)
     print("  rejoined split tables:", unsplit_tables(doc))  # re-split once on the book layout
+
+    # Align Chapter 4 title with friend's passed book: ผลการดำเนินงานและการทดสอบ
+    h1 = doc.paragraphs[0]
+    if h1.style.name == "Heading 1":
+        for r in h1.runs:
+            if "ผลการดำเนินงาน" in r.text and "และการทดสอบ" not in r.text:
+                r.text = r.text.replace("ผลการดำเนินงาน", "ผลการดำเนินงานและการทดสอบ")
 
     # Test cases 4.1 to 4.17: Set page_break_before on Heading 2 so each test case starts on a new page cleanly
     for p in doc.paragraphs:
@@ -100,6 +146,12 @@ def prepare_ch4():
     ch4_comparison.blank_before_first_table(doc)
     ch4_comparison.add_comparison(doc)  # 4.18 before/after comparison + table 4.23
 
+    # Add transition line after 4.18 in topic list
+    for p in doc.paragraphs:
+        if p.text.strip().startswith("4.18 การเปรียบเทียบการทำงาน"):
+            ch4_comparison.clone_after(p._p, doc.paragraphs[1], "\tซึ่งแต่ละหัวข้อมีรายละเอียดดังต่อไปนี้")
+            break
+
     doc.save(dst)
     print(f"Saved prepared Chapter 4: {dst}")
     return dst
@@ -115,23 +167,49 @@ def prepare_ch5():
     print(f"Preparing Chapter 5 from {path}...")
     doc = docx.Document(path)
 
-    # follow the cut of 4.17 (failed test cases): drop 5.1.6 and 5.3.5, renumber 5.1.7,
-    # and 5.4.1 becomes the payment-slip suggestion
-    def para(prefix):
-        return next(p for p in doc.paragraphs if p.text.strip().startswith(prefix))
-    for prefix in ("5.1.6 ", "5.3.5 "):
-        para(prefix)._p.getparent().remove(para(prefix)._p)
-    r = next(r for r in para("5.1.7 ").runs if "5.1.7" in r.text)
-    r.text = r.text.replace("5.1.7", "5.1.6", 1)
-    p = para("5.4.1 ")
-    runs = [r for r in p.runs if r.text]
-    runs[-1].text = ("\t" if p.text.startswith("\t") else "") + SLIP_SUGGESTION
-    for r in runs[:-1]:
-        r.text = ""
-    text = "\n".join(p.text for p in doc.paragraphs)
-    for gone in ("4.17", "ไม่ผ่าน", "secure_storage", "5.1.7"):
-        assert gone not in text, f"chapter 5 still mentions {gone!r}"
-    ch4_comparison.update_ch5(doc)  # 5.1.7 comparison summary, 5.4.6 dropped, 5.4.7 measure the gain
+    # Align Chapter 5 title with friend's passed book: สรุปผลและข้อเสนอแนะ (no space)
+    h1 = doc.paragraphs[0]
+    if h1.style.name == "Heading 1":
+        for r in h1.runs:
+            if "สรุปผล และข้อเสนอแนะ" in r.text:
+                r.text = r.text.replace("สรุปผล และข้อเสนอแนะ", "สรุปผลและข้อเสนอแนะ")
+
+    # Insert Chapter 5 intro and topic list before 5.1 if not present
+    if not any("โดยมีหัวข้อดังนี้" in p.text for p in doc.paragraphs[:6]):
+        body_tmpl = next(p for p in doc.paragraphs if p.style.name == "Normal" and p.text.strip())
+        anchor = h1._p
+        intro_txt = ("\tโครงงานนี้พัฒนาแอปพลิเคชันบนสมาร์ตโฟนและระบบบริการหลังบ้านของ Chatshop ซึ่งรวมแชทจาก "
+                     "LINE Official Account, Facebook Messenger, Instagram และ WebChat ไว้ในกล่องข้อความเดียว "
+                     "พร้อมระบบแจ้งเตือน Push Notification การควบคุมแชทบอท การจัดการสินค้า ลูกค้า คำสั่งซื้อ และรายงานสรุปผล "
+                     "บทนี้สรุปผลการดำเนินงานเทียบกับวัตถุประสงค์ อภิปรายผล ปัญหาและอุปสรรค และข้อเสนอแนะสำหรับการพัฒนาต่อ โดยมีหัวข้อดังนี้")
+        p_intro = ch4_comparison.clone_after(anchor, body_tmpl, intro_txt)
+        anchor = p_intro._p
+        for t_line in ("5.1 สรุปผลการดำเนินงาน", "5.2 อภิปรายผล", "5.3 ปัญหาและอุปสรรค", "5.4 ข้อเสนอแนะและแนวทางในการพัฒนาต่อ"):
+            pt = ch4_comparison.clone_after(anchor, body_tmpl, t_line)
+            pt.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            pt.paragraph_format.left_indent = Cm(1.27)
+            anchor = pt._p
+        p_trans = ch4_comparison.clone_after(anchor, body_tmpl, "\tซึ่งแต่ละหัวข้อมีรายละเอียดดังต่อไปนี้")
+        ch4_comparison.clone_after(p_trans._p, body_tmpl, "")
+
+    # follow the cut of 4.17 (failed test cases) only if the document still has old sections
+    has_old_535 = any(p.text.strip().startswith("5.3.5 ") for p in doc.paragraphs)
+    if has_old_535:
+        def para(prefix):
+            return next(p for p in doc.paragraphs if p.text.strip().startswith(prefix))
+        for prefix in ("5.1.6 ", "5.3.5 "):
+            para(prefix)._p.getparent().remove(para(prefix)._p)
+        r = next(r for r in para("5.1.7 ").runs if "5.1.7" in r.text)
+        r.text = r.text.replace("5.1.7", "5.1.6", 1)
+        p = para("5.4.1 ")
+        runs = [r for r in p.runs if r.text]
+        runs[-1].text = ("\t" if p.text.startswith("\t") else "") + SLIP_SUGGESTION
+        for r in runs[:-1]:
+            r.text = ""
+        text = "\n".join(p.text for p in doc.paragraphs)
+        for gone in ("4.17", "ไม่ผ่าน", "secure_storage", "5.1.7"):
+            assert gone not in text, f"chapter 5 still mentions {gone!r}"
+        ch4_comparison.update_ch5(doc)  # 5.1.7 comparison summary, 5.4.6 dropped, 5.4.7 measure the gain
 
     # Verify all runs are tagged Thai
     for p in doc.paragraphs:

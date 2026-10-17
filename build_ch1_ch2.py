@@ -38,9 +38,24 @@ def add_caption(container, label, chapter, text, align):
     p.paragraph_format.space_after = Pt(0)
     p.paragraph_format.keep_with_next = True
     seq_no = container._seq[label] = container._seq.get(label, 0) + 1
-    
-    # Text run: "รูปที่ 2.X  ชื่อรูป" (directly write number, plus SEQ field for Word TOC)
-    p.add_run(f"{label} {chapter}.{seq_no}  {text}")
+    p.add_run(f"{label} {chapter}.")
+    fld = OxmlElement("w:fldSimple")
+    fld.set(qn("w:instr"), f" SEQ {label} \\* ARABIC ")
+    r = OxmlElement("w:r")
+    rPr = OxmlElement("w:rPr")
+    fonts = OxmlElement("w:rFonts")
+    for a in ("w:ascii", "w:hAnsi", "w:cs"):
+        fonts.set(qn(a), "TH SarabunPSK")
+    fonts.set(qn("w:hint"), "cs")
+    rPr.append(fonts)
+    rPr.append(OxmlElement("w:cs"))
+    r.append(rPr)
+    t = OxmlElement("w:t")
+    t.text = str(seq_no)
+    r.append(t)
+    fld.append(r)
+    p._p.append(fld)
+    p.add_run(f"  {text}")
     return p
 
 def add_figure(doc, chapter, title):
@@ -149,6 +164,7 @@ def build_chapter_content(doc, lines, is_first_chapter=False):
                 p = doc.add_paragraph(f"{chapter}.{topic_idx} {t}")
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 p.paragraph_format.left_indent = Cm(1.27)
+            doc.add_paragraph("\tซึ่งแต่ละหัวข้อมีรายละเอียดดังต่อไปนี้")
             continue
 
         m = NUM_RE.match(line)
@@ -166,8 +182,12 @@ def build_chapter_content(doc, lines, is_first_chapter=False):
             clean_title = NUM_RE.sub("", line).strip()
             r = p.add_run(clean_title)
             r.bold = True
+        elif level >= 3 and chapter == 1:
+            clean_title = NUM_RE.sub("", line).strip()
+            doc.add_paragraph(clean_title, style=f"Heading {min(level, 4)}")
+            under_item = False
         elif level >= 3:
-            # Sub-heading (1.2.1, 2.1.1, etc.) -> Normal text, indented, typed number
+            # Sub-heading (2.1.1, etc.) -> Normal text, indented, typed number
             # level 3 = 1 tab, level 4 = 2 tabs
             tabs = "\t" * (level - 2)
             doc.add_paragraph(tabs + line)

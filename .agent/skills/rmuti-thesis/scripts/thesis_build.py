@@ -82,11 +82,14 @@ def add_figure(doc, chapter, title):
         el.set(qn("w:color"), "auto")
         tblBorders.append(el)
     box._tbl.tblPr.append(tblBorders)
+    trPr = box.rows[0]._tr.get_or_add_trPr()
+    trPr.append(OxmlElement("w:cantSplit"))
 
     cell = box.rows[0].cells[0]
     cell.width = Cm(14.65)
     ph = cell.paragraphs[0]
     ph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    ph.paragraph_format.keep_with_next = True
     if img_path:
         run = ph.add_run()
         run.add_picture(img_path, width=Cm(13.0))
@@ -104,8 +107,7 @@ PIC = "{http://schemas.openxmlformats.org/drawingml/2006/picture}"
 
 
 def normalize_figures(doc):
-    """House style for figures (as the author fixed by hand): the picture has a
-    thin black outline, the 1x1 table holding it has no borders at all."""
+    """House style for figures: picture has NO outline/border, the 1x1 table holding it has no borders at all."""
     for tbl in doc.element.body.iter(qn("w:tbl")):
         if tbl.find(".//" + PIC + "pic") is None:
             continue
@@ -131,17 +133,9 @@ def normalize_figures(doc):
         for tcb in tbl.iter(qn("w:tcBorders")):
             tcb.getparent().remove(tcb)
     for spPr in doc.element.body.iter(PIC + "spPr"):
-        if spPr.find(A + "ln") is not None:
-            continue
-        ln = OxmlElement("a:ln")
-        fill = OxmlElement("a:solidFill")
-        clr = OxmlElement("a:schemeClr")
-        clr.set("val", "tx1")
-        fill.append(clr)
-        ln.append(fill)
-        # a:ln comes after xfrm / geometry / fill, before effects
-        nxt = next((c for c in spPr if c.tag in (A + "effectLst", A + "effectDag", A + "scene3d", A + "sp3d", A + "extLst")), None)
-        (nxt.addprevious if nxt is not None else spPr.append)(ln)
+        ln = spPr.find(A + "ln")
+        if ln is not None:
+            spPr.remove(ln)
 
 
 def add_data_table(doc, chapter, title, rows):
@@ -432,11 +426,13 @@ def build_doc(lines):
             elif not first_h2:
                 doc.add_paragraph()  # senior: blank line before each X.X
             first_h2, under_item = False, False
-            doc.add_paragraph(NUM_RE.sub("", line), style="Heading 2")
+            h2 = doc.add_paragraph(NUM_RE.sub("", line), style="Heading 2")
+            h2.paragraph_format.keep_with_next = True
         elif level >= 3 and chapter == 1:
             doc.add_paragraph(NUM_RE.sub("", line), style=f"Heading {min(level, 4)}")
         elif level >= 3:
-            doc.add_paragraph("\t" * (level - 2) + line)
+            p = doc.add_paragraph("\t" * (level - 2) + line)
+            p.paragraph_format.keep_with_next = True
             under_item = True
         else:
             doc.add_paragraph(("\t\t" if under_item else "\t") + line)

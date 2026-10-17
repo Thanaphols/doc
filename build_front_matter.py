@@ -147,7 +147,7 @@ def build_cover():
         ("หัวข้อปริญญานิพนธ์  : ", "แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)"),
         ("จัดทำโดย   : ", "นายธนพล  วุฒิธาดา"),
         ("สาขาวิชา  : ", "วิศวกรรมคอมพิวเตอร์"),
-        ("ประธานที่ปรึกษา   : ", "อาจารย์ ดร.ประภาส  ผ่องสนาม")
+        ("ประธานที่ปรึกษา   : ", "ผู้ช่วยศาสตราจารย์ ดร.อติราช  สุขสวัสดิ์")
     ]
     for row_idx, (col1, col2) in enumerate(info_data):
         row = t_info.rows[row_idx]
@@ -177,9 +177,9 @@ def build_cover():
     t_comm._tbl.tblPr.append(tblBorders)
     comm_data = [
         (".............................................ประธานกรรมการสอบ", "................................................ประธานที่ปรึกษา"),
-        ("(อาจารย์ อรินธร  เจษฎาเมธาขจร)", "(อาจารย์ ดร.ประภาส  ผ่องสนาม)"),
-        (".............................................กรรมการสอบ", ".............................................. กรรมการ"),
-        ("(อาจารย์ ดร.ปิยะนุช  ตั้งกิตติพล)", "(อาจารย์ ดร.ประภาส  ผ่องสนาม)")
+        ("(ผู้ช่วยศาสตราจารย์ ดร.จักรพนธ์  อบมา)", "(ผู้ช่วยศาสตราจารย์ ดร.อติราช  สุขสวัสดิ์)"),
+        (".............................................กรรมการ", ""),
+        ("(อาจารย์ ดร.ประภาส  ผ่องสนาม)", "")
     ]
     for row_idx, (c1, c2) in enumerate(comm_data):
         row = t_comm.rows[row_idx]
@@ -218,7 +218,7 @@ def build_acknowledgements():
     # Content
     body_text_1 = (
         "\tปริญญานิพนธ์ฉบับนี้สำเร็จลุล่วงด้วยความกรุณาและความเอาใจใส่จากหลายภาคส่วน "
-        "ผู้จัดทำขอกราบขอบพระคุณ อาจารย์ ดร.ประภาส ผ่องสนาม อาจารย์ที่ปรึกษาปริญญานิพนธ์ "
+        "ผู้จัดทำขอกราบขอบพระคุณ ผู้ช่วยศาสตราจารย์ ดร.อติราช  สุขสวัสดิ์ อาจารย์ที่ปรึกษาปริญญานิพนธ์ "
         "ที่ได้ให้คำแนะนำ ชี้แนะแนวทางการดำเนินงาน และถ่ายทอดองค์ความรู้ด้านการพัฒนาระบบอย่างใกล้ชิด "
         "ด้วยความเอื้ออาทรและอดทนตลอดระยะเวลาของการทำโครงงาน รวมถึงขอขอบพระคุณ คณะกรรมการสอบปริญญานิพนธ์ ทุกท่าน "
         "ที่ได้ให้ข้อเสนอแนะและข้อคิดเห็นอันทรงคุณค่า ซึ่งมีส่วนสำคัญในการพัฒนาโครงงานให้มีความสมบูรณ์ยิ่งขึ้น"
@@ -255,33 +255,47 @@ def build_abstract():
     doc = create_base_doc()
     
     # Page ง - Thai Abstract
-    add_p(doc, "ง", align=WD_ALIGN_PARAGRAPH.RIGHT, size=16, space_a=18)
+    p_num_th = add_p(doc, "ง", align=WD_ALIGN_PARAGRAPH.RIGHT, size=16)
+    p_num_th.paragraph_format.space_after = Pt(12)
     
-    t_info = doc.add_table(rows=5, cols=2)
-    set_no_borders(t_info)
-    
-    info_th = [
-        ("หัวข้อปริญญานิพนธ์", "แอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)"),
-        ("จัดทำโดย", "นายธนพล  วุฒิธาดา"),
-        ("ปีที่ปริญญานิพนธ์สำเร็จ", "พ.ศ. 2569"),
-        ("สาขาวิชา", "วิศวกรรมคอมพิวเตอร์"),
-        ("ประธานที่ปรึกษา", "อาจารย์ ดร.ประภาส  ผ่องสนาม")
-    ]
-    for row_idx, (col1, col2) in enumerate(info_th):
-        row = t_info.rows[row_idx]
-        p1 = row.cells[0].paragraphs[0]
-        p1.paragraph_format.space_before = Pt(2)
-        p1.paragraph_format.space_after = Pt(2)
-        r1 = p1.add_run(col1)
-        mark_thai(r1, bold=True)
-        
-        p2 = row.cells[1].paragraphs[0]
-        p2.paragraph_format.space_before = Pt(2)
-        p2.paragraph_format.space_after = Pt(2)
-        r2 = p2.add_run(f": {col2}")
-        mark_thai(r2)
+    # Clear any inherited tab stops on Normal
+    if "Normal" in doc.styles:
+        doc.styles["Normal"].paragraph_format.tab_stops.clear_all()
 
-    add_p(doc, "บทคัดย่อ", align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, size=16, space_b=12, space_a=12)
+    # Metadata headers using exact 4.0 cm hanging indent & tab stops (matching senior thesis reference)
+    info_th = [
+        "หัวข้อปริญญานิพนธ์\tแอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop)",
+        "จัดทำโดย\tธนพล  วุฒิธาดา",
+        "ปีที่ปริญญานิพนธ์สำเร็จ\tพ.ศ. 2569",
+        "สาขาวิชา\tวิศวกรรมคอมพิวเตอร์",
+        "ประธานที่ปรึกษา\tผู้ช่วยศาสตราจารย์ ดร.อติราช  สุขสวัสดิ์"
+    ]
+    from docx.oxml import parse_xml
+    from docx.oxml.ns import nsdecls
+    for line in info_th:
+        p = doc.add_paragraph()
+        for r in list(p.runs): p._p.remove(r._r)
+        if p._p.pPr is not None: p._p.remove(p._p.pPr)
+        pPr_xml = (
+            f'<w:pPr {nsdecls("w")}>'
+            '<w:tabs><w:tab w:val="left" w:pos="2268"/></w:tabs>'
+            '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+            '<w:ind w:left="2268" w:hanging="2268"/>'
+            '<w:jc w:val="left"/>'
+            '</w:pPr>'
+        )
+        p._p.append(parse_xml(pPr_xml))
+        r = p.add_run(line)
+        mark_thai(r, font_size=16)
+    
+    # Spacing before "บทคัดย่อ": 2 blank lines (16pt) as per RMUTI manual
+    add_p(doc, "", size=16, space_b=0, space_a=0, line_spacing=1.0)
+    add_p(doc, "", size=16, space_b=0, space_a=0, line_spacing=1.0)
+    
+    add_p(doc, "บทคัดย่อ", align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, size=16, space_b=0, space_a=0, line_spacing=1.0)
+    
+    # Spacing after "บทคัดย่อ": 1 blank line (16pt)
+    add_p(doc, "", size=16, space_b=0, space_a=0, line_spacing=1.0)
     
     abs_th_1 = (
         "\tโครงงานนี้นำเสนอการพัฒนาแอปพลิเคชันรวมศูนย์ข้อความและการจัดการคำสั่งซื้อสำหรับธุรกิจออนไลน์ (Chatshop) "
@@ -291,47 +305,57 @@ def build_abstract():
         "ร่วมกับฐานข้อมูล MySQL และ MongoDB สำหรับประมวลผล Webhook ขาเข้า และแอปพลิเคชันบนสมาร์ตโฟนที่พัฒนาด้วย Flutter "
         "ที่ช่วยให้เจ้าหน้าที่สามารถติดตามและตอบกลับข้อความจากทุกช่องทางได้ภายในหน้าต่างเดียวแบบเรียลไทม์"
     )
-    p = add_p(doc, abs_th_1, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_a=6)
+    add_p(doc, abs_th_1, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_b=0, space_a=0, line_spacing=1.0)
 
     abs_th_2 = (
-        "\tนอกจากนี้ ระบบยังได้บูรณาการระบบแชทบอทอัจฉริยะที่รองรับการค้นคืนข้อมูลจากฐานความรู้ (Retrieval-Augmented Generation: RAG) "
+        "\tนอกจากนี้ระบบยังได้บูรณาการระบบแชทบอทที่รองรับการค้นคืนข้อมูลจากฐานความรู้ (Retrieval-Augmented Generation: RAG) "
         "เพื่อช่วยแนะนำคำตอบและตอบกลับลูกค้าอัตโนมัติ พร้อมทั้งฟังก์ชันการแจ้งเตือนแชทที่ค้างตอบเกินกำหนด "
         "และการเปิดคำสั่งซื้อสินค้าได้โดยตรงจากหน้าต่างสนทนา จากผลการทดสอบระบบและการประเมินความพึงพอใจจากกลุ่มผู้ใช้งานจริงจำนวน 15 คน "
         "พบว่าระบบได้รับความพึงพอใจในภาพรวมอยู่ในระดับดี โดยมีค่าเฉลี่ยรวมเท่ากับ 4.10 และค่าส่วนเบี่ยงเบนมาตรฐานเท่ากับ 0.37 "
         "ซึ่งแสดงให้เห็นว่าระบบสามารถช่วยเพิ่มประสิทธิภาพและลดภาระในการบริหารจัดการร้านค้าออนไลน์ได้อย่างเป็นรูปธรรม"
     )
-    p = add_p(doc, abs_th_2, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_a=8)
+    add_p(doc, abs_th_2, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_b=0, space_a=0, line_spacing=1.0)
 
-    add_p(doc, "คำสำคัญ : แอปพลิเคชันสมาร์ตโฟน, รวมศูนย์ข้อความ, จัดการคำสั่งซื้อ, แชทบอท, Flutter, Laravel", bold=True, size=16)
+    p_kw_th = add_p(doc, "คำสำคัญ\t\t:  แอปพลิเคชันสมาร์ตโฟน, รวมศูนย์ข้อความ, จัดการคำสั่งซื้อ, แชทบอท, Flutter, Laravel", align=WD_ALIGN_PARAGRAPH.LEFT, size=16, space_b=0, space_a=0, line_spacing=1.0)
+    p_kw_th.paragraph_format.tab_stops.add_tab_stop(Cm(1.8), WD_TAB_ALIGNMENT.LEFT)
 
     # Page จ - English Abstract
     doc.add_page_break()
-    p_num_en = add_p(doc, "จ", align=WD_ALIGN_PARAGRAPH.RIGHT, size=16, space_a=12)
+    p_num_en = add_p(doc, "จ", align=WD_ALIGN_PARAGRAPH.RIGHT, size=16)
+    p_num_en.paragraph_format.space_after = Pt(12)
     
-    t_info_en = doc.add_table(rows=5, cols=2)
-    set_no_borders(t_info_en)
     info_en = [
-        ("Project Title", "Chatshop: Centralized Chat and Order Management Application for Online Business"),
-        ("Proposed by", "Mr. Thanaphol  Wuttitada"),
-        ("Year", "2026"),
-        ("Department", "Computer Engineering"),
-        ("Advisor", "Prapas  Phongsanam, D.Eng.")
+        "Project Title\tCentralized Chat and Order Management",
+        "\tApplication for Online Business",
+        "Proposed by\tThanaphol  Wuttitada",
+        "Year\t2026",
+        "Department\tComputer Engineering",
+        "Advisor\tAssistant Professor, Atirarj Suksawad, D.Eng"
     ]
-    for row_idx, (col1, col2) in enumerate(info_en):
-        row = t_info_en.rows[row_idx]
-        p1 = row.cells[0].paragraphs[0]
-        p1.paragraph_format.space_before = Pt(0)
-        p1.paragraph_format.space_after = Pt(1)
-        r1 = p1.add_run(col1)
-        mark_thai(r1, bold=True)
-        
-        p2 = row.cells[1].paragraphs[0]
-        p2.paragraph_format.space_before = Pt(0)
-        p2.paragraph_format.space_after = Pt(1)
-        r2 = p2.add_run(f": {col2}")
-        mark_thai(r2)
+    for line in info_en:
+        p = doc.add_paragraph()
+        for r in list(p.runs): p._p.remove(r._r)
+        if p._p.pPr is not None: p._p.remove(p._p.pPr)
+        pPr_xml = (
+            f'<w:pPr {nsdecls("w")}>'
+            '<w:tabs><w:tab w:val="left" w:pos="2268"/></w:tabs>'
+            '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+            '<w:ind w:left="2268" w:hanging="2268"/>'
+            '<w:jc w:val="left"/>'
+            '</w:pPr>'
+        )
+        p._p.append(parse_xml(pPr_xml))
+        r = p.add_run(line)
+        mark_thai(r, font_size=16)
 
-    add_p(doc, "Abstract", align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, size=16, space_b=8, space_a=8)
+    # Spacing before "Abstract": 2 blank lines (16pt)
+    add_p(doc, "", size=16, space_b=0, space_a=0, line_spacing=1.0)
+    add_p(doc, "", size=16, space_b=0, space_a=0, line_spacing=1.0)
+    
+    add_p(doc, "Abstract", align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, size=16, space_b=0, space_a=0, line_spacing=1.0)
+    
+    # Spacing after "Abstract": 1 blank line (16pt)
+    add_p(doc, "", size=16, space_b=0, space_a=0, line_spacing=1.0)
     
     abs_en_1 = (
         "\tThis project presents the development of Chatshop, a centralized messaging and order management mobile application for online businesses. "
@@ -340,18 +364,19 @@ def build_abstract():
         "The architecture comprises a robust backend service developed using Laravel 10 with MySQL and MongoDB databases for real-time webhook ingestion, "
         "and a cross-platform mobile application developed using Flutter, enabling store staff to manage all communications within a single unified inbox."
     )
-    p = add_p(doc, abs_en_1, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_a=4)
+    add_p(doc, abs_en_1, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_b=0, space_a=0, line_spacing=1.0)
 
     abs_en_2 = (
-        "\tFurthermore, the system integrates an intelligent chatbot equipped with Retrieval-Augmented Generation (RAG) to provide automated responses "
+        "\tFurthermore, the system integrates a chatbot equipped with Retrieval-Augmented Generation (RAG) to provide automated responses "
         "and suggested replies, along with overdue response alert notifications and integrated chat-order creation features. "
         "The functional test results and user satisfaction evaluation conducted with 15 representative users indicated a high level of satisfaction, "
         "with an overall mean score of 4.10 and a standard deviation of 0.37. "
         "These results demonstrate that Chatshop significantly enhances workflow efficiency and streamlines communication for modern online merchants."
     )
-    p = add_p(doc, abs_en_2, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_a=6)
+    add_p(doc, abs_en_2, align=WD_ALIGN_PARAGRAPH.THAI_JUSTIFY, size=16, space_b=0, space_a=0, line_spacing=1.0)
 
-    add_p(doc, "Keywords : Mobile Application, Centralized Messaging, Order Management, Chatbot, Flutter, Laravel", bold=True, size=16)
+    p_kw_en = add_p(doc, "Keywords\t\t:  Mobile Application, Centralized Messaging, Order Management, Chatbot, Flutter, Laravel", align=WD_ALIGN_PARAGRAPH.LEFT, size=16, space_b=0, space_a=0, line_spacing=1.0)
+    p_kw_en.paragraph_format.tab_stops.add_tab_stop(Cm(1.8), WD_TAB_ALIGNMENT.LEFT)
 
     out_docx = os.path.join(OUT_DIR, "Chatshop_บทคัดย่อ.docx")
     out_pdf = os.path.join(OUT_DIR, "Chatshop_บทคัดย่อ.pdf")
@@ -591,8 +616,11 @@ def main():
     build_cover()
     build_acknowledgements()
     build_abstract()
-    build_toc()
-    print("\nAll separate front matter files created successfully!")
+    if "--with-toc" in sys.argv:
+        build_toc()
+    else:
+        print("Skipping TOC (สารบัญ) as requested.")
+    print("\nFront matter files created successfully!")
 
 if __name__ == "__main__":
     main()
